@@ -19,6 +19,11 @@ public class PlayerFreeState : PlayerState
         base.Update();
         player.movement.SetMoveInput(player.moveInput);
         player.look.Look(player.mousePosition);
+
+        if(input.Player.Interact.WasPerformedThisFrame())
+        {
+            player.interactor.TryToInteract();
+        }
     }
 
     public override void Exit()

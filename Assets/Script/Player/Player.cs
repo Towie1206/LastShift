@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public PlayerFreeState freeState { get; private set; }
     public PlayerMovement movement { get; private set; }
     public PlayerLook look { get; private set; }
+    public PlayerInteractor interactor { get; private set; }
 
     public Vector2 moveInput { get; private set; }
     public Vector2 mousePosition { get; private set; }
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
         input = new PlayerInput();
         movement = GetComponent<PlayerMovement>();
         look = GetComponent<PlayerLook>();
+        interactor = GetComponent<PlayerInteractor>();
 
         stateMachine = new StateMachine();
         freeState = new PlayerFreeState(this, stateMachine);
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour
         input.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>(); //ctx = context
         //input stoped,when you release the key
         input.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+
 
     }
 
