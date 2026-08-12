@@ -1,7 +1,5 @@
 using UnityEngine;
 
-namespace Game.UI.Menu
-{
     /// <summary>
     /// Chịu trách nhiệm duy nhất: đảm bảo cursor hiển thị và không bị khóa trong Main Menu.
     /// </summary>
@@ -13,4 +11,3 @@ namespace Game.UI.Menu
             Cursor.visible = true;
         }
     }
-}

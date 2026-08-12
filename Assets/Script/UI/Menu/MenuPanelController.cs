@@ -1,7 +1,5 @@
 using UnityEngine;
 
-namespace Game.UI.Menu
-{
     /// <summary>
     /// Chịu trách nhiệm duy nhất: quản lý hiển thị MainPanel, SettingsPanel, CreditsPanel.
     /// Tại mọi thời điểm chỉ có một panel active.
@@ -45,4 +43,3 @@ namespace Game.UI.Menu
             selectedPanel.SetActive(true);
         }
     }
-}

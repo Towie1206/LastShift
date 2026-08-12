@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Game.UI.Menu
-{
     /// <summary>
     /// Chịu trách nhiệm duy nhất: bắt đầu game và thoát game.
     /// </summary>
-    public class MainMenuActions : MonoBehaviour
-    {
+public class MainMenuActions : MonoBehaviour
+{
         [SerializeField] private string gameSceneName = "Game";
 
         /// <summary>
@@ -27,5 +25,4 @@ namespace Game.UI.Menu
         {
             Application.Quit();
         }
-    }
 }

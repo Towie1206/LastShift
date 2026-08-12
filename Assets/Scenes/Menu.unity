@@ -835,7 +835,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 352433634}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2094964310}
+        m_TargetAssemblyTypeName: MainMenuActions, Assembly-CSharp
+        m_MethodName: StartShift
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &352433634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1305,7 +1317,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 465692886}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2094964308}
+        m_TargetAssemblyTypeName: MenuPanelController, Assembly-CSharp
+        m_MethodName: ShowMainPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &465692886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1942,7 +1966,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 923345367}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2094964308}
+        m_TargetAssemblyTypeName: MenuPanelController, Assembly-CSharp
+        m_MethodName: ShowMainPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &923345367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2063,7 +2099,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 969649432}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2094964310}
+        m_TargetAssemblyTypeName: MainMenuActions, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &969649432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2321,7 +2369,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1008423960}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2094964308}
+        m_TargetAssemblyTypeName: MenuPanelController, Assembly-CSharp
+        m_MethodName: ShowCreditsPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1008423960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3947,6 +4007,95 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2074377408}
   m_CullTransparentMesh: 1
+--- !u!1 &2094964306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2094964311}
+  - component: {fileID: 2094964310}
+  - component: {fileID: 2094964309}
+  - component: {fileID: 2094964308}
+  - component: {fileID: 2094964307}
+  m_Layer: 0
+  m_Name: MenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2094964307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094964306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d237e3e78a38c4fbf6df7c92ce3617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.Menu.MenuSettings
+  masterVolumeSlider: {fileID: 1518263840}
+  fullscreenToggle: {fileID: 1954646694}
+--- !u!114 &2094964308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094964306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69eb0a7bfd3124049a000ebac1d0bdf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.Menu.MenuPanelController
+  mainPanel: {fileID: 1486637272}
+  settingsPanel: {fileID: 1640998843}
+  creditsPanel: {fileID: 202735465}
+--- !u!114 &2094964309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094964306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1279fb49cd1618840bb164b363d09021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.Menu.MenuCursorController
+--- !u!114 &2094964310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094964306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec36282797199442b7d9c19d70e8e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.Menu.MainMenuActions
+  gameSceneName: Game
+--- !u!4 &2094964311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094964306}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.10079, y: -0, z: -9.65948}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2110348686
 GameObject:
   m_ObjectHideFlags: 0
@@ -4029,7 +4178,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2110348689}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2094964308}
+        m_TargetAssemblyTypeName: MenuPanelController, Assembly-CSharp
+        m_MethodName: ShowSettingsPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2110348689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4212,4 +4373,5 @@ SceneRoots:
   - {fileID: 1171676762}
   - {fileID: 133395824}
   - {fileID: 2031823244}
+  - {fileID: 2094964311}
   - {fileID: 632164575}

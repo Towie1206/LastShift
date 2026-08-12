@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.UI.Menu
-{
     /// <summary>
     /// Chịu trách nhiệm duy nhất: quản lý Master Volume và Fullscreen,
     /// đọc/lưu PlayerPrefs và áp dụng settings.
@@ -54,4 +52,3 @@ namespace Game.UI.Menu
             PlayerPrefs.Save();
         }
     }
-}
