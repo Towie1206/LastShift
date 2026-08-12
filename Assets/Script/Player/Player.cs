@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -5,9 +6,14 @@ public class Player : MonoBehaviour
     public PlayerInput input { get; private set; }
     public StateMachine stateMachine { get; private set; }
     public PlayerFreeState freeState { get; private set; }
+    public PlayerCCTVState cctvState { get; private set; }
     public PlayerMovement movement { get; private set; }
     public PlayerLook look { get; private set; }
     public PlayerInteractor interactor { get; private set; }
+
+    [SerializeField] private CCTVView cctvViewReference;
+
+    public CCTVView cctvView => cctvViewReference;
 
     public Vector2 moveInput { get; private set; }
     public Vector2 mousePosition { get; private set; }
@@ -20,6 +26,7 @@ public class Player : MonoBehaviour
 
         stateMachine = new StateMachine();
         freeState = new PlayerFreeState(this, stateMachine);
+        cctvState = new PlayerCCTVState(this, stateMachine);
     }
     private void OnEnable()
     {
@@ -52,5 +59,15 @@ public class Player : MonoBehaviour
     private void Update()
     {
         stateMachine.UpdateActiveState();
+    }
+
+    public void EnterCCTV()
+    {
+        stateMachine.ChangeState(cctvState);
+    }
+
+    public void ExitCCTV() 
+    { 
+        stateMachine.ChangeState(freeState);
     }
 }
