@@ -6535,7 +6535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLook
   cameraPivot: {fileID: 382393599}
-  lookSensitivity: 0.18
+  lookSensitivity: 0.1
   maxLookAngle: 80
   minLookAngle: -80
 --- !u!114 &1074500684
