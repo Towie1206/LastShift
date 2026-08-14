@@ -1,16 +1,29 @@
+using TMPro;
 using UnityEngine;
 
 public class ShiftClockUI : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private ShiftClock shiftClock;
+    [SerializeField] private TMP_Text text;
+
+    private void OnEnable()
     {
-        
+        shiftClock.hourChanged += HandleHourChange;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        shiftClock.hourChanged -= HandleHourChange;
+    }
+
+    private void HandleHourChange(int hour)
+    {
+        int displayHour = hour % 12;
+
+        if(displayHour == 0) 
+            displayHour = 12;
+
+        string suffix = hour < 12 ? "AM" : "PM";
+        text.text = $"{displayHour}:00 {suffix}";
     }
 }
