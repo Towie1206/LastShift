@@ -46,6 +46,7 @@ public class MenuIntroSequence : MonoBehaviour
     {
         if (staticOverlay != null) staticOverlay.SetActive(false);
         if (flickerFace != null) flickerFace.SetActive(false);
+        if (backgroundMusicSource != null) backgroundMusicSource.Stop();
 
         if (warningPanel != null)
         {
