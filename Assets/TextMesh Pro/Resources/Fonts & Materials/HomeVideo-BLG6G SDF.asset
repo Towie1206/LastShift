@@ -36,7 +36,7 @@ MonoBehaviour:
     m_StrikethroughThickness: 13.500001
     m_TabWidth: 54
   m_Material: {fileID: 4113661452735742566}
-  m_SourceFontFileGUID: 5a7af6362f69ed3408eecaaeb7aefcea
+  m_SourceFontFileGUID: 
   m_CreationSettings:
     sourceFontFileName: 
     sourceFontFileGUID: 5a7af6362f69ed3408eecaaeb7aefcea

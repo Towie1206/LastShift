@@ -4,24 +4,17 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// MenuHoverArrow.cs
 /// -------------------
-/// Chịu trách nhiệm duy nhất: khi chuột rê vào 1 nút trong Menu, di chuyển mũi tên chỉ dẫn
-/// (Arrow) tới ngang hàng với nút đó - tạo cảm giác "đang được chọn" giống game console cũ.
-///
-/// CÁCH DÙNG: gắn script này riêng vào TỪNG nút (StartButton, SettingsButton, CreditsButton,
-/// QuitButton...) - mỗi bản đều kéo CÙNG 1 object Arrow duy nhất vào ô "Arrow" bên dưới.
-///
-/// Vì sao dùng IPointerEnterHandler thay vì Update()? Đây là 1 interface (giao diện) có sẵn
-/// của chính Unity, dùng để Unity tự gọi hàm OnPointerEnter() đúng lúc chuột chạm vào -
-/// không phải interface tự bịa ra, và giúp mình không phải kiểm tra vị trí chuột liên tục
-/// trong Update() mỗi khung hình.
+/// Chịu trách nhiệm duy nhất: khi chuột hoặc gamepad/bàn phím chọn 1 nút trong Menu,
+/// di chuyển mũi tên chỉ dẫn (Arrow) tới ngang hàng với nút đó.
 /// </summary>
-public class MenuHoverArrow : MonoBehaviour, IPointerEnterHandler
+public class MenuHoverArrow : MonoBehaviour,
+    IPointerEnterHandler, IPointerExitHandler,
+    ISelectHandler, IDeselectHandler
 {
     [Header("Kéo object mũi tên chỉ dẫn (dùng chung cho mọi nút) vào đây")]
     [SerializeField] private RectTransform arrow;
 
-    // Vị trí X gốc của mũi tên, ghi nhớ lại lúc Menu vừa mở lên, để mỗi lần di chuyển
-    // chỉ đổi vị trí Y (lên/xuống) mà vẫn giữ nguyên cột X ban đầu.
+    // Vị trí X gốc của mũi tên, ghi nhớ lại lúc Menu vừa mở lên
     private Vector2 arrowStartPosition;
 
     private void Start()
@@ -32,14 +25,38 @@ public class MenuHoverArrow : MonoBehaviour, IPointerEnterHandler
         }
     }
 
-    /// <summary>
-    /// Unity tự động gọi hàm này khi chuột vừa di vào vùng của nút đang gắn script này.
-    /// </summary>
-    public void OnPointerEnter(PointerEventData eventData)
+    // Khi chuột rê vào nút
+    public void OnPointerEnter(PointerEventData eventData) => MoveArrow(true);
+
+    // Khi chuột rời khỏi nút
+    public void OnPointerExit(PointerEventData eventData) => SetHighlighted(false);
+
+    // Khi nút được chọn bằng gamepad/bàn phím
+    public void OnSelect(BaseEventData eventData) => MoveArrow(true);
+
+    // Khi nút bị bỏ chọn
+    public void OnDeselect(BaseEventData eventData) => SetHighlighted(false);
+
+    private void MoveArrow(bool on)
     {
         if (arrow == null) return;
 
         Vector2 targetPosition = (transform as RectTransform).position;
         arrow.position = new Vector2(arrowStartPosition.x, targetPosition.y);
+
+        SetHighlighted(on);
+    }
+
+    private void SetHighlighted(bool on)
+    {
+        if (arrow == null) return;
+
+        var image = arrow.GetComponent<UnityEngine.UI.Image>();
+        if (image != null)
+        {
+            var color = image.color;
+            color.a = on ? 1f : 0.3f; // sáng khi được chọn, mờ khi không
+            image.color = color;
+        }
     }
 }
