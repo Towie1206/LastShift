@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WatcherLocation
   isAttackLocation: 1
+  cameraIndex: 2
 --- !u!1 &25952981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,6 +1047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WatcherLocation
   isAttackLocation: 0
+  cameraIndex: 3
 --- !u!43 &90527854
 Mesh:
   m_ObjectHideFlags: 0
@@ -1428,13 +1430,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 127743035}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20525937, y: -0.45988062, z: 0.11016111, w: 0.85687983}
-  m_LocalPosition: {x: 13.552, y: 5.25, z: -11.858}
+  m_LocalRotation: {x: 0.36380467, y: -0.43070015, z: 0.19525112, w: 0.80250895}
+  m_LocalPosition: {x: 13.75, y: 5.25, z: -11.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 274233364}
-  m_LocalEulerAnglesHint: {x: 26.942, y: -56.444, z: 0}
+  m_LocalEulerAnglesHint: {x: 48.773, y: -56.444, z: 0}
 --- !u!114 &127743037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3649,6 +3651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WatcherLocation
   isAttackLocation: 0
+  cameraIndex: 0
 --- !u!43 &322709268
 Mesh:
   m_ObjectHideFlags: 0
@@ -13786,6 +13789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WatcherLocation
   isAttackLocation: 0
+  cameraIndex: 1
 --- !u!1 &1072567886
 GameObject:
   m_ObjectHideFlags: 0
@@ -14513,13 +14517,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187617477}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17157893, y: 0.37759608, z: -0.07142049, w: 0.90712786}
+  m_LocalRotation: {x: 0.17023797, y: 0.39416006, z: -0.07455213, w: 0.90005493}
   m_LocalPosition: {x: -25.72, y: 4.859, z: -12.105}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 274233364}
-  m_LocalEulerAnglesHint: {x: 21.421, y: 45.2, z: 0}
+  m_LocalEulerAnglesHint: {x: 21.421, y: 47.3, z: 0}
 --- !u!114 &1187617479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14716,6 +14720,8 @@ GameObject:
   - component: {fileID: 1221968427}
   - component: {fileID: 1221968428}
   - component: {fileID: 1221968429}
+  - component: {fileID: 1221968431}
+  - component: {fileID: 1221968430}
   m_Layer: 0
   m_Name: Watcher
   m_TagString: Untagged
@@ -14771,6 +14777,39 @@ MonoBehaviour:
   - {fileID: 79949280}
   - {fileID: 1224949321}
   - {fileID: 1046051935}
+--- !u!114 &1221968430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221968426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe73a951f949987488604f3b5da435f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WatcherObservation
+  movement: {fileID: 1221968428}
+  cameraSystem: {fileID: 1657548114}
+  cctvView: {fileID: 2116663293}
+  ignoredDuration: 15
+--- !u!114 &1221968431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221968426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89094d3b59663fe4db411f83a3ff66e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WatcherBrain
+  observation: {fileID: 1221968430}
+  roaming: {fileID: 1221968429}
+  movement: {fileID: 1221968428}
+  attackLocation: {fileID: 8130815}
+  threatLevelRequiredAttack: 4
 --- !u!1 &1224949319
 GameObject:
   m_ObjectHideFlags: 0
@@ -14816,6 +14855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WatcherLocation
   isAttackLocation: 0
+  cameraIndex: 4
 --- !u!1 &1247658388
 GameObject:
   m_ObjectHideFlags: 0
@@ -18311,6 +18351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WatcherLocation
   isAttackLocation: 0
+  cameraIndex: 5
 --- !u!1 &1704420979
 GameObject:
   m_ObjectHideFlags: 0

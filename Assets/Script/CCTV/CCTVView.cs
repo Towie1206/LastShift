@@ -17,4 +17,9 @@ public class CCTVView : MonoBehaviour
     {
         cctvPanel.SetActive(false);
     }
+
+    public bool isVisible()
+    {
+        return cctvPanel != null && cctvPanel.activeInHierarchy;
+    }    
 }

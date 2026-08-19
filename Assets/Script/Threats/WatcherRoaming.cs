@@ -42,8 +42,7 @@ public class WatcherRoaming : MonoBehaviour
         if (availableLocations.Count == 0)
             return null;
 
-        int randomIndex =
-            Random.Range(0, availableLocations.Count);
+        int randomIndex = Random.Range(0, availableLocations.Count);
 
         return availableLocations[randomIndex];
     }
