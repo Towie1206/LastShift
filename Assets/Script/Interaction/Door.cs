@@ -3,14 +3,11 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [SerializeField] private GameObject Light;
-
     [SerializeField] private Vector3 openPos;
     [SerializeField] private Vector3 closePos;
-
     [SerializeField] private float speed;
-
-    public bool isOpen;
-    public bool isOn;
+    [SerializeField] bool isOpen;
+    [SerializeField] bool isOn;
 
     private void Start()
     {
@@ -40,6 +37,13 @@ public class Door : MonoBehaviour
     public void LightToggle()
     {
         isOn = !isOn;
+    }
+
+    public bool IsFullyClosed()
+    {
+        float distanceToClosedPosition = Vector3.Distance(transform.localPosition, closePos);
+        
+        return distanceToClosedPosition <= 0.01f;
     }
 
 }
