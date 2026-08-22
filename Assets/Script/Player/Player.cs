@@ -10,8 +10,11 @@ public class Player : MonoBehaviour
     public PlayerMovement movement { get; private set; }
     public PlayerLook look { get; private set; }
     public PlayerInteractor interactor { get; private set; }
+    public PlayerLetterState letterState { get; private set; }
 
     [SerializeField] private CCTVView cctvViewReference;
+    [SerializeField] private Transform holdPointReference;
+    public Transform holdPoint => holdPointReference;
 
     public CCTVView cctvView => cctvViewReference;
 
@@ -27,6 +30,7 @@ public class Player : MonoBehaviour
         stateMachine = new StateMachine();
         freeState = new PlayerFreeState(this, stateMachine);
         cctvState = new PlayerCCTVState(this, stateMachine);
+        letterState = new PlayerLetterState(this, stateMachine);
     }
     private void OnEnable()
     {
@@ -61,13 +65,21 @@ public class Player : MonoBehaviour
         stateMachine.UpdateActiveState();
     }
 
-    public void EnterCCTV()
+    public void ExitCCTV()
     {
-        stateMachine.ChangeState(cctvState);
-    }
-
-    public void ExitCCTV() 
-    { 
         stateMachine.ChangeState(freeState);
-    }
+    }    
+
+    public void OpenLetter (LetterStation letter)
+    {
+        letterState.SetLetter(letter);
+        stateMachine.ChangeState(letterState);
+    }    
+
+    public void CloseLetter ()
+    {
+        stateMachine.ChangeState(freeState);
+    } 
+        
+
 }
