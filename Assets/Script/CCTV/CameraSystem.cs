@@ -17,15 +17,8 @@ public class CameraSystem : MonoBehaviour
 
         for (int i = 0; i < cameras.Length; i++)
         {
-            if (cameras[i] == null)
-            {
-                Debug.LogWarning("Camera at index " + i + " is null.");
-                continue;
-            }    
-
             cameras[i].targetTexture = outputTexture;
             cameras[i].gameObject.SetActive(false);
-
         }
         currentCamIndex = startingCameraIndex;
 
