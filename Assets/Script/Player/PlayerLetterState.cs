@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class PlayerLetterState : PlayerState
 {
     public PlayerLetterState(Player player, StateMachine stateMachine) : base(player, stateMachine)
@@ -11,7 +13,7 @@ public class PlayerLetterState : PlayerState
         base.Enter();
         player.movement.Stop();
         currentLetter?.PickUp(player.holdPoint);
-
+        Cursor.visible = false;
     }
 
     public override void Update()

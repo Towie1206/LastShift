@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd6ee4ba19a0c644b9d86ffb56f4050, type: 3}
+  m_Name: D_NYC_PictureFrame
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  lines:
+  - "T\xECnh ch\xFAng ta b\u1EAFt \u0111\u1EA7u khi m\xF9a thu tr\u1EDF l\u1EA1i,
+    khi nh\u1EEFng ch\xF9m hoa th\u1EA1ch th\u1EA3o ng\xE1t h\u01B0\u01A1ng tr\xEAn
+    nh\u1EEFng l\u1ED1i \u0111i quen."
+  - "M\xF9a thu b\u1EAFt \u0111\u1EA7u tr\xEAn d\xF2ng s\xF4ng b\xE1t ng\xE1t, m\xF9a
+    thu nhu\u1ED9m v\xE0ng nh\u1EEFng c\xE1nh r\u1EEBng, m\xF9a thu ph\u01A1i \xE1o
+    m\u01A1 phai, chi\u1EC1u v\xF5 v\xE0ng v\u1EDBi x\xE1c hoa tr\xEAn m\xECnh b\u01B0\u1EDBm. "
+  - "Anh \u0111\xE3 \u0111\u1EBFn v\u1EDBi em nh\u01B0 \u0111\xE1m m\xE2y th\xE1ng
+    B\u1EA3y tr\u0129u n\u1EB7ng m\u01B0a r\xE0o. Anh \u0111\xE3 t\u01B0\u1EDFng
+    qu\xEAn, d\xF9 b\xE2y gi\u1EDD m\xF9a thu \u0111\xE3 ch\u1EBFt."
+  - "M\u1ED7i m\xF9a thu kh\xE1c c\xF3 th\u1EC3 tr\u1EDF v\u1EC1, nh\u01B0ng m\xF9a
+    thu c\u1EE7a ch\xFAng ta \u0111\xE3 ch\u1EBFt. Anh c\u0169ng \u0111\u1EEBng qu\xEAn
+    c\xE1i ng\xE0y sung s\u01B0\u1EDBng h\u1EA1nh ph\xFAc \u0111\xF3. Anh \u0111\u1EEBng
+    qu\xEAn em d\xF9 \u0111\xF4i ch\xFAng ta s\u1EBD ch\u1EB3ng c\xF2n tao ph\xF9ng
+    \u0111\u01B0\u1EE3c n\u1EEFa\u2026"

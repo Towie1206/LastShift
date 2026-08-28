@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -11,12 +12,14 @@ public class Player : MonoBehaviour
     public PlayerLook look { get; private set; }
     public PlayerInteractor interactor { get; private set; }
     public PlayerLetterState letterState { get; private set; }
+    public PlayerDialogueState dialogueState { get; private set; }
 
     [SerializeField] private CCTVView cctvViewReference;
     [SerializeField] private Transform holdPointReference;
+    [SerializeField] private DialogueController dialogueControllerReference;
     public Transform holdPoint => holdPointReference;
-
     public CCTVView cctvView => cctvViewReference;
+    public DialogueController dialogueController => dialogueControllerReference;
 
     public Vector2 moveInput { get; private set; }
     public Vector2 mousePosition { get; private set; }
@@ -31,6 +34,9 @@ public class Player : MonoBehaviour
         freeState = new PlayerFreeState(this, stateMachine);
         cctvState = new PlayerCCTVState(this, stateMachine);
         letterState = new PlayerLetterState(this, stateMachine);
+        dialogueState = new PlayerDialogueState(this, stateMachine);
+
+        stateMachine.Initialize(freeState);
     }
     private void OnEnable()
     {
@@ -57,7 +63,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        stateMachine.Initialize(freeState);
+        
     }
 
     private void Update()
@@ -80,6 +86,17 @@ public class Player : MonoBehaviour
     {
         stateMachine.ChangeState(freeState);
     } 
+
+    public void EnterDialogue()
+    {
+        stateMachine.ChangeState(dialogueState);
+    }
+
+    public void ExitDialogue()
+    {
+        stateMachine.ChangeState(freeState);
+    }
+        
         
 
 }

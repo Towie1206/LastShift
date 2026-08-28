@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd6ee4ba19a0c644b9d86ffb56f4050, type: 3}
+  m_Name: D_HomeIntro
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  lines:
+  - "M\u1ED9t ng\xE0y n\u1EEFa nh\u01B0 bao ng\xE0y l\xE0 m\u1ED9t b\xE9o loser l\u01B0\u1EDDi
+    t\u1EAFm th\u1EA5t b\u1EA1i, t\xF4i ch\u1EB3ng nh\u1EDB m\xECnh tr\u1EDF th\xE0nh
+    nh\u01B0 v\u1EADy t\u1EEB bao gi\u1EDD\u2026 "
+  - "Ch\u1EAFc l\xE0 t\u1EEB l\xFAc m\xECnh b\u1ECF b\xEA vi\u1EC7c h\u1ECDc \u0111\u1EC3
+    go pro gi\u1EA5c m\u01A1 tuy\u1EC3n th\u1EE7 chuy\xEAn nghi\u1EC7p r\u1ED3i v\u1EC1
+    v\u01B0\u1EDDn l\xE0m streamer nh\u01B0ng ch\u1EB3ng v\xF4 \u0111\u1ECBch n\u1ED5i
+    c\xE1i gi\u1EA3i c\u1ECF n\xE0o."
+  - "Ngh\u0129 l\u1EA1i l\u1EA1i th\u1EA5y cay, sao nh\u1EEFng th\u1EB1ng x\u01B0a
+    h\u1ECDc \u0111\u1EA1i h\u1ECDc n\u0103m \u0111\xF3  n\u0103m \u0111\xF3 B\u1EB1ng,
+    Ki\xEAn v\xE0 Nam c\xE1i l\u0169 ghen t\u1EF5 v\u1EDBi t\xECnh y\xEAu c\u1EE7a
+    m\xECnh l\u1EA1i c\xF3 th\u1EC3 th\xE0nh c\xF4ng nh\u01B0 v\u1EADy?!!"

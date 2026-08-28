@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# TextMesh Pro is a bundled third-party asset; exclude it from GitHub language stats.
+"Assets/TextMesh Pro/**" linguist-vendored
