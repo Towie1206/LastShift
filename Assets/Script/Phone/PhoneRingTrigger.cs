@@ -7,30 +7,32 @@ public class PhoneRingTrigger : MonoBehaviour
     [SerializeField] private DialogueController dialogueController;
     [SerializeField] private DialogueData data;
     [SerializeField] private Player player;
+    private bool hasTriggered = false;
+    private Collider collider;
+
+    private void Awake()
+    {
+        collider = GetComponent<Collider>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
+            if (hasTriggered) return;
+            collider.enabled = false;
+            hasTriggered = true;
+            dialogueController.Completed += HandleEnd;
             player.EnterDialogue();
             phoneStation.StartRinging();
-            gameObject.SetActive(false);
             dialogueController.Play(data);
         }    
     }
 
-    private void OnEnable()
-    {
-        dialogueController.Completed += HandleEnd;
-    }
-
-    private void OnDisable()
-    {
-        dialogueController.Completed -= HandleEnd;
-    }
-
     private void HandleEnd()
     {
+        dialogueController.Completed -= HandleEnd;
         player.ExitDialogue();
+        gameObject.SetActive(false);
     }
 }

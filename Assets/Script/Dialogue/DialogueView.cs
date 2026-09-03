@@ -66,7 +66,7 @@ public class DialogueView : MonoBehaviour
 
         int characterCount = dialogueBoxText.textInfo.characterCount;
 
-        for(int i = 0; i <= characterCount;  i++)
+        for(int i = 0; i < characterCount;  i++)
         {
             dialogueBoxText.maxVisibleCharacters += 1;
             yield return new WaitForSeconds(textSpeed);

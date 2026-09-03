@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public PlayerInteractor interactor { get; private set; }
     public PlayerLetterState letterState { get; private set; }
     public PlayerDialogueState dialogueState { get; private set; }
+    public PlayerComputerState computerState { get; private set; }
 
     [SerializeField] private CCTVView cctvViewReference;
     [SerializeField] private Transform holdPointReference;
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
         cctvState = new PlayerCCTVState(this, stateMachine);
         letterState = new PlayerLetterState(this, stateMachine);
         dialogueState = new PlayerDialogueState(this, stateMachine);
+        computerState = new PlayerComputerState(this, stateMachine);
 
         stateMachine.Initialize(freeState);
     }
@@ -96,7 +98,15 @@ public class Player : MonoBehaviour
     {
         stateMachine.ChangeState(freeState);
     }
-        
-        
+    public void EnterComputer()
+    {
+        stateMachine.ChangeState(computerState);
+    }
+
+    public void ExitComputer()
+    {
+        stateMachine.ChangeState(freeState);
+    }
+
 
 }

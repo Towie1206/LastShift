@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4ef8d548451a8439670bc3b1dc9b66, type: 3}
+  m_Name: D_NewChat
+  m_EditorClassIdentifier: Assembly-CSharp::ManagerChatData
+  turns:
+  - playerMessage: "Ch\xE0o ch\xFA, ch\xE1u l\xE0 Kh\u1ED1i. M\u1EB9 ch\xE1u gi\u1EDBi
+      thi\u1EC7u r\u1EB1ng ch\xFA c\xF3 m\u1ED9t c\xF4ng vi\u1EC7c ph\xF9 h\u1EE3p
+      v\u1EDBi ch\xE1u, \u0111\xFAng kh\xF4ng \u1EA1?  "
+    managerReplies:
+    - message: "\xC0, th\u1EB1ng B\xE9o Kh\u1ED1i, con m\u1EB9 Trang l\xE0m \u1EDF
+        V\u0169 Tr\u1EE5 \u0110\u1ED3ng N\xE1t \u0111\xFAng kh\xF4ng? "
+      delayBefore: 1.5
+    - message: "M\u1EB9 m\xE0y k\u1EC3 cho b\xE1c nhi\u1EC1u v\u1EC1 m\xE0y l\u1EAFm"
+      delayBefore: 0.75
+    - message: "V\u1EADy m\xE0y \u0111\xE3 s\u1EB5n s\xE0ng l\xE0m vi\u1EC7c ch\u01B0a?"
+      delayBefore: 0.75
+  - playerMessage: "Ch\xFA c\xF3 th\u1EC3 n\xF3i ch\xE1u c\u1EE5 th\u1EC3 c\xF4ng
+      vi\u1EC7c th\u1EBF n\xE0o kh\xF4ng \u1EA1?"
+    managerReplies:
+    - message: "T\u1EA5t c\u1EA3 nh\u1EEFng g\xEC m\xE0y ph\u1EA3i l\xE0m l\xE0 tr\u1EF1c
+        b\u1EA3o v\u1EC7 an ninh"
+      delayBefore: 0.75
+    - message: "Vi\u1EC7c c\u1EE7a m\xE0y l\xE0 quan s\xE1t camera, ghi ch\xE9p v\xE0
+        b\xE1o c\xE1o l\u1EA1i nh\u1EEFng th\u1EE9 b\u1EA5t th\u01B0\u1EDDng"
+      delayBefore: 1
+    - message: "Ch\u1EC9 c\xF3 v\u1EADy th\xF4i. \u0110\u01A1n gi\u1EA3n m\xE0, \u0111\xFAng
+        kh\xF4ng? "
+      delayBefore: 0.75
+  - playerMessage: "Th\u1EF1c s\u1EF1 c\xF3 vi\u1EC7c t\u1ED1t nh\u01B0 v\u1EADy
+      v\u1EDBi m\u1EE9c l\u01B0\u01A1ng cao \u1EA1?"
+    managerReplies:
+    - message: "Ch\xFA \u0111\xE3 bao gi\u1EDD l\u1EEBa m\xE0y c\xE1i g\xEC \u0111\xE2u,
+        vi\u1EC7c t\u1ED1t nh\u01B0 n\xE0y m\u1EB9 m\xE0y xin m\xE3i cho m\xE0y \u0111\u1EA5y"
+      delayBefore: 1.5
+    - message: "N\u1EBFu m\xE0 m\xE0y l\xE0m \u0111\u01B0\u1EE3c th\xEC t\u1ED1i
+        nay g\u1EB7p tao \u1EDF XXX, ABC, XYZ "
+      delayBefore: 1
+    - message: "C\xF2n v\u1EC1 l\u01B0\u01A1ng th\xEC y\xEAn t\xE2m \u0111i m s\u1EBD
+        \u0111\u01B0\u1EE3c tr\u1EA3 35k/h  "
+      delayBefore: 0.75
+    - message: "\u0110\u1EB7c bi\u1EC7t n\u1EBFu m ho\xE0n th\xE0nh xu\u1EA5t s\u1EAFc
+        tao s\u1EBD c\xE2n nh\u1EAFc th\u01B0\u1EDFng th\xEAm cho m\xE0y"
+      delayBefore: 0.75
+  - playerMessage: "D\u1EA1 v\xE2ng, t\u1ED1i ch\xE1u s\u1EBD g\u1EB7p t\xECm ch\xFA
+      \u1EA1"
+    managerReplies:
+    - message: "\u1EEA. C\xF3 m\u1EB7t l\xFAc 10 gi\u1EDD. \u0110\u1EEBng \u0111\u1EBFn
+        mu\u1ED9n"
+      delayBefore: 0.75

@@ -19,16 +19,6 @@ public class PhoneStation : MonoBehaviour, IInteractable
     private Quaternion originalTranformRotation;
 
 
-    private void OnEnable()
-    {
-        dialogueController.Completed += HandleEnd;
-    }
-
-    private void OnDisable()
-    {
-        dialogueController.Completed -= HandleEnd;
-    }
-
     private bool isRinging, isInUse;
 
     private void Awake()
@@ -41,7 +31,9 @@ public class PhoneStation : MonoBehaviour, IInteractable
             return;
 
         isRinging = false;
+        isInUse = true;
         ringing.Stop();
+        dialogueController.Completed += HandleEnd;
         PickUp(holdPoint);
         player.EnterDialogue();
 
@@ -126,7 +118,12 @@ public class PhoneStation : MonoBehaviour, IInteractable
 
     private void HandleEnd()
     {
+        if (!isInUse) return;
+        dialogueController.Completed -= HandleEnd;
         PutBack();
+        collider.enabled = true;
+        isInUse = false;
+        moveCo = null;
         player.ExitDialogue();
     }
 }

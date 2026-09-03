@@ -11,7 +11,8 @@ public class PlayerComputerState : PlayerState
         base.Enter();
         player.movement.Stop();
         player.look.enabled = false;
-        Cursor.visible = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public override void Exit()

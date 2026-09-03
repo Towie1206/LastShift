@@ -9,22 +9,16 @@ public class HomeIntroSequence : MonoBehaviour
 
     private Coroutine coroutine;
 
-    private void OnEnable()
-    {
-        dialogueController.Completed += HandleCompletedIntro;
-    }
-    private void OnDisable()
-    {
-        dialogueController.Completed -= HandleCompletedIntro;
-    }
     private void Start()
     {
+        dialogueController.Completed += HandleCompletedIntro;
         player.EnterDialogue();
         dialogueController.Play(data);
     }
 
     private void HandleCompletedIntro()
     {
+        dialogueController.Completed -= HandleCompletedIntro;
         coroutine = StartCoroutine(curtainTransition.OpenEyes());
         player.ExitDialogue();
     }
