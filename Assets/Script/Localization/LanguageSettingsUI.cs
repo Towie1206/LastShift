@@ -1,39 +1,43 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class LanguageSettingsUI : MonoBehaviour
 {
-    [Header("Dropdown tham chiếu (Nấu có)")]
-    [SerializeField] private TMP_Dropdown languageDropdown;
+    [Header("UI References")]
+    public Image imgBtnVietnamese;
+    public Image imgBtnEnglish;
+
+    public Color activeColor = Color.white;
+    public Color inactiveColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+
 
     private void Start()
     {
-        if (languageDropdown != null)
-        {
-            // Cập nhật giá trị hiển thị lúc mới mở Menu: 0 = Tiếng Việt, 1 = English
-            languageDropdown.value = LanguageManager.IsEnglish ? 1 : 0;
-            
-            // Lắng nghe sự kiện người dùng đổi Dropdown
-            languageDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
-        }
+        UpdateVisuals();
     }
-
-    // Gắn hàm này vào OnClick của nút "Tiếng Việt" (Nếu dùng 2 Buttons riêng)
     public void SetVietnamese()
     {
         LanguageManager.IsEnglish = false;
+        UpdateVisuals();
     }
 
-    // Gắn hàm này vào OnClick của nút "English" (Nếu dùng 2 Buttons riêng)
     public void SetEnglish()
     {
         LanguageManager.IsEnglish = true;
+        UpdateVisuals();
     }
 
-    // Tự động gọi nếu dùng Dropdown
-    private void OnDropdownValueChanged(int index)
+    private void UpdateVisuals()
     {
-        // Giả định: Index 0 là Tiếng Việt, Index 1 là English
-        LanguageManager.IsEnglish = (index == 1);
+        if (LanguageManager.IsEnglish)
+        {
+            imgBtnEnglish.color = activeColor;
+            imgBtnVietnamese.color = inactiveColor;
+        }
+        else
+        {
+            imgBtnEnglish.color = inactiveColor;
+            imgBtnVietnamese.color = activeColor;
+        }
     }
 }
