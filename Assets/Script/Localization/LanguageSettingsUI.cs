@@ -1,20 +1,26 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LanguageSettingsUI : MonoBehaviour
 {
-    [Header("UI References")]
-    public Image imgBtnVietnamese;
-    public Image imgBtnEnglish;
+    [Header("Nút chọn ngôn ngữ")]
+    [SerializeField] private Image imgBtnVietnamese;
+    [SerializeField] private Image imgBtnEnglish;
 
-    public Color activeColor = Color.white;
-    public Color inactiveColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+    [Header("Ô tick đánh dấu ngôn ngữ đang chọn")]
+    [SerializeField] private GameObject checkVietnamese;
+    [SerializeField] private GameObject checkEnglish;
 
-
+    [Header("Box thông báo (tooltip) khi rê chuột")]
+    [SerializeField] private GameObject tooltipBox;
+    [SerializeField] private TMP_Text tooltipText; 
     private void Start()
     {
         UpdateVisuals();
+        HideTooltip();
     }
+
     public void SetVietnamese()
     {
         LanguageManager.IsEnglish = false;
@@ -27,17 +33,25 @@ public class LanguageSettingsUI : MonoBehaviour
         UpdateVisuals();
     }
 
+    // Bật/tắt ô tick theo ngôn ngữ đang được chọn (thay cho việc đổi màu sáng/tối trước đây)
     private void UpdateVisuals()
     {
-        if (LanguageManager.IsEnglish)
-        {
-            imgBtnEnglish.color = activeColor;
-            imgBtnVietnamese.color = inactiveColor;
-        }
-        else
-        {
-            imgBtnEnglish.color = inactiveColor;
-            imgBtnVietnamese.color = activeColor;
-        }
+        bool isEnglish = LanguageManager.IsEnglish;
+
+        checkVietnamese.SetActive(!isEnglish);
+        checkEnglish.SetActive(isEnglish);
+    }
+
+    // Được LanguageOptionHoverTooltip gọi khi chuột rê vào một lựa chọn
+    public void ShowTooltip(string message)
+    {
+        tooltipText.text = message;
+        tooltipBox.SetActive(true);
+    }
+
+    // Được gọi khi chuột rời khỏi lựa chọn
+    public void HideTooltip()
+    {
+        tooltipBox.SetActive(false);
     }
 }
