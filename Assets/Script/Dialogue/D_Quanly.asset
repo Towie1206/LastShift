@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd6ee4ba19a0c644b9d86ffb56f4050, type: 3}
+  m_Name: D_Quanly
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  lines:
+  - "Ki E:\n\xD4 th\u1EADt t\u1ED1t khi m\xE0y l\u1EA1i nh\u1EADn c\xF4ng vi\u1EC7c
+    n\xE0y."
+  - "Ki E:\nM\u1ECDi th\u1EE9 g\u1EA7n \u0111\xE2y r\u1EA5t kh\xF3 kh\u0103n v\u1EDBi
+    tao c\u1EE9 t\u01B0\u1EDFng c\xE1i th\xE2n gi\xE0 n\xE0y s\u1EBD ph\u1EA3i th\xFAc
+    tr\u1EF1c c\u1EA3 \u0111\xEAm ch\u1EE9."
+  - "Ki E:\nH\xE3y c\u1EE9 c\u1ED1 g\u1EAFng l\xE0m t\u1ED1t c\xF4ng vi\u1EC7c c\u1EE7a
+    m\xECnh tao \u0111\u1EA3m b\u1EA3o s\u1EBD kh\xF4ng \u0111\u1EC3 m\xE0y ph\u1EA3i
+    thi\u1EC7t."
+  - "Ch\xE1u r\u1EA5t c\u1EA3m k\xEDch v\xEC c\xF4ng vi\u1EC7c n\xE0y gi\u1EDD m\xECnh
+    v\xE0o \u0111\u01B0\u1EE3c ch\u01B0a \u1EA1."
+  - "Ki E:\nT\u1ED1t th\xF4i, v\xEC l\xF2ng nhi\u1EC7t huy\u1EBFt c\u1EE7a m\xE0y
+    tao s\u1EBD cho m\xE0y 1 l\u01B0u \xFD nh\u1ECF\u2026 \u0110\u1EEBng ra kh\u1ECFi
+    ph\xF2ng tr\u01B0\u1EDBc khi h\u1EBFt ca."
+  - "Ki E:\nV\xE0 n\u1EBFu c\xF3 b\u1EA5t c\u1EE9 chuy\u1EC7n kh\xF4ng hay g\xEC
+    x\u1EA3y ra v\u1EDBi m\xE0y, tao s\u1EBD kh\xF4ng ch\u1ECBu tr\xE1ch nhi\u1EC7m
+    g\xEC. "
+  - "Ki E:\nM\u1EB9 m\xE0y c\u0169ng \u0111\xE3 ch\u1EA5p nh\u1EADn \u0111i\u1EC1u
+    \u0111\xF3 n\u1EBFu c\xF3 b\u1EA5t c\u1EE9 v\u1EA5n \u0111\u1EC1 g\xEC th\xEC
+    h\xE3y o\xE1n tr\xE1ch b\xE0 \u1EA5y."
+  - "*Ch\u1EC9 l\xE0 c\xF4ng vi\u1EC7c b\u1EA3o v\u1EC7 th\xF4i m\xE0 c\xF3 g\xEC
+    t\u1EC7 c\u01A1 ch\u1EE9."
+  lines_en:
+  - 'Ki E:
+
+    It is good that you are taking on this job.'
+  - 'Ki E:
+
+    Things have been very difficult lately, I thought I would have to
+    stay up all night'
+  - 'Ki E:
+
+    Just focus on doing your job well, I will ensure you are fairly compensated.'
+  - Thank you for this job. Can we get started now?
+  - "Ki E:\nGood. Since you\u2019re so enthusiastic, here\u2019s a quick heads-up:
+    don\u2019t leave the room until your shift is over."
+  - 'Ki E:
+
+    And if anything unfortunate happens to you, I will not be held responsible.'
+  - 'Ki E:
+
+    Your mother has accepted this, so if any issues arise, blame her.'
+  - '*It''s just a security job. How bad could it be?'
