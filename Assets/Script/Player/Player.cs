@@ -54,13 +54,23 @@ public class Player : MonoBehaviour
         //input stoped,when you release the key
         input.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
-
+        // Bắt sự kiện bấm nút Esc
+        input.Player.Exit.performed += OnExitPressed;
     }
 
     private void OnDisable()
     {
 
         input.Disable();
+        input.Player.Exit.performed -= OnExitPressed;
+    }
+
+    private void OnExitPressed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        if (PauseMenuController.Instance != null)
+        {
+            PauseMenuController.Instance.TogglePause();
+        }
     }
 
     private void Start()
