@@ -71,7 +71,7 @@ public class MaintenanceView : MonoBehaviour
 
     private void StartReboot(SubSystem system, TMP_Text statusText)
     {
-        if (maintenanceSystem.IsOnline(system) || maintenanceSystem.IsRebooting(system))
+        if (maintenanceSystem.IsRebooting(system))
             return;
 
         maintenanceSystem.RebootSubSystem(system);
@@ -84,14 +84,9 @@ public class MaintenanceView : MonoBehaviour
     {
         maintenanceSystem.RebootAll();
         
-        if (!maintenanceSystem.IsOnline(SubSystem.CameraDevices))
-            StartCoroutine(LoadingAnimationRoutine(SubSystem.CameraDevices, cameraStatusText));
-            
-        if (!maintenanceSystem.IsOnline(SubSystem.Lighting))
-            StartCoroutine(LoadingAnimationRoutine(SubSystem.Lighting, lightingStatusText));
-            
-        if (!maintenanceSystem.IsOnline(SubSystem.Electricity))
-            StartCoroutine(LoadingAnimationRoutine(SubSystem.Electricity, airCleanerStatusText));
+        StartCoroutine(LoadingAnimationRoutine(SubSystem.CameraDevices, cameraStatusText));
+        StartCoroutine(LoadingAnimationRoutine(SubSystem.Lighting, lightingStatusText));
+        StartCoroutine(LoadingAnimationRoutine(SubSystem.Electricity, airCleanerStatusText));
 
         if (rebootAllStatusText != null)
         {
@@ -112,12 +107,12 @@ public class MaintenanceView : MonoBehaviour
         while (maintenanceSystem.IsRebooting(system))
         {
             dotCount++;
-            if (dotCount > 3) dotCount = 1;
+            if (dotCount > 4) dotCount = 1;
             
             string dots = new string('.', dotCount);
             statusText.text = $"loading{dots}";
             
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.3f);
         }
         
         UnpdateExitButtonState(); // Mở khóa nút Exit khi animation kết thúc
@@ -133,12 +128,12 @@ public class MaintenanceView : MonoBehaviour
                maintenanceSystem.IsRebooting(SubSystem.Electricity))
         {
             dotCount++;
-            if (dotCount > 3) dotCount = 1;
+            if (dotCount > 4) dotCount = 1;
             
             string dots = new string('.', dotCount);
             rebootAllStatusText.text = $"loading{dots}";
             
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.3f);
         }
         rebootAllStatusText.text = ""; // Xong thì ẩn đi
         
