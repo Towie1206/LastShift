@@ -6,6 +6,7 @@ public class AnomalyObject : MonoBehaviour
     [Header("Định danh sự kiện")]
     [SerializeField] private AnomalyLocation anomalyLocation;
     [SerializeField] private AnomalyType anomalyType;
+    [SerializeField] private AnomalyDifficulty anomalyDifficulty;
 
     [Header("Danh Sách Tráo Đổi")]
     [SerializeField] private GameObject[] normalObject;
@@ -30,7 +31,7 @@ public class AnomalyObject : MonoBehaviour
         }
         IsActive = true;
     }
-    private void Deactivate()
+    public void Deactivate()
     {
         foreach (var obj in normalObject)
         {
@@ -41,9 +42,10 @@ public class AnomalyObject : MonoBehaviour
         {
             obj.SetActive(false);
         }
-        IsActive = false;
+        IsActive = false; 
     }
 
     public AnomalyType AnomalyType => anomalyType;
     public AnomalyLocation AnomalyLocation => anomalyLocation;
+    public AnomalyDifficulty AnomalyDifficulty => anomalyDifficulty;
 }

@@ -8,22 +8,23 @@ public class ShiftClockUI : MonoBehaviour
 
     private void OnEnable()
     {
-        shiftClock.hourChanged += HandleHourChange;
+        shiftClock.timeChanged += HandleHourChange;
     }
 
     private void OnDisable()
     {
-        shiftClock.hourChanged -= HandleHourChange;
+        shiftClock.timeChanged -= HandleHourChange;
     }
 
-    private void HandleHourChange(int hour)
+    private void HandleHourChange(int hour,int minute)
     {
         int displayHour = hour % 12;
+        int displayMinute = minute;
 
         if(displayHour == 0) 
             displayHour = 12;
 
         string suffix = hour < 12 ? "AM" : "PM";
-        text.text = $"{displayHour}:00 {suffix}";
+        text.text = $"{displayHour}:{displayMinute:D2} {suffix}";
     }
 }

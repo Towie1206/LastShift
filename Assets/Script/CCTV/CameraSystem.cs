@@ -40,4 +40,9 @@ public class CameraSystem : MonoBehaviour
         currentCamIndex = camIndex;
     }
 
+    public AnomalyLocation GetCurrentLocation()
+    {
+        CameraLocation camLoc = cameras[currentCamIndex].GetComponent<CameraLocation>();
+        return camLoc.Location;
+    }
 }
