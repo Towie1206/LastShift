@@ -11,6 +11,7 @@ public class QuanLyInteract : MonoBehaviour, IInteractable
     [SerializeField] private Transform securityRoomSpawnPoint;
     [SerializeField] private ShiftClock clock;
     [SerializeField] private AnomalyManager anomalyManager;
+    [SerializeField] private GeneratorSystem generatorSystem;
 
     private void Start()
     {
@@ -48,5 +49,6 @@ public class QuanLyInteract : MonoBehaviour, IInteractable
 
         clock.enabled = true;
         anomalyManager.StartShift();
+        generatorSystem.StartGeneratorAfterDelay(45f);
     }
 }
