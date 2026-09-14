@@ -50,12 +50,12 @@ public class ManagerChatView : MonoBehaviour
 
     public void AddPlayerMessage(string message)
     {
-        AppendMessage("Bạn", message);
+        AppendMessage("You", message);
     }
 
     public void AddManagerMessage(string message)
     {
-        AppendMessage("Quản lý", message);
+        AppendMessage("Trun Ki E", message);
     }
 
     private void AppendMessage(string sender, string message)

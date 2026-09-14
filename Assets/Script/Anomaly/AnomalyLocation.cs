@@ -7,5 +7,6 @@ public enum AnomalyLocation
     RightHallway,
     Kitchen,
     StoreHouse,
-    Bathroom
+    Bathroom,   
+    AudioRoom,
 }

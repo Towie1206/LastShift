@@ -7,5 +7,6 @@ public class NpcWaveGreeting : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         animator.SetTrigger("PlayerPassed");
+        Destroy(gameObject);
     }
 }

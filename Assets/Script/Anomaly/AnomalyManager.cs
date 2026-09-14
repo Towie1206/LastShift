@@ -7,6 +7,7 @@ public class AnomalyManager : MonoBehaviour
     [Header("Danh sách các anomaly")]
     [SerializeField] private AnomalyObject[] anomalies;
     [SerializeField] private WatcherBrain watcherBrain;
+    [SerializeField] private ShiftClock shiftClock;
 
     [Header("Thời gian")]
     [SerializeField] private float minSpawnTime = 15f;
@@ -14,7 +15,7 @@ public class AnomalyManager : MonoBehaviour
 
     private int point = 0;
 
-    private void Start()
+    public void StartShift()
     {
         StartCoroutine(SpawnAnomalyRoutine());
     }
@@ -22,8 +23,9 @@ public class AnomalyManager : MonoBehaviour
     private IEnumerator SpawnAnomalyRoutine()
     {
 
-        yield return new WaitForSeconds(30f);
+        yield return new WaitForSeconds(45f);
         float timePassed = 0f;
+
         while (true)
         {
             float waitTime = Random.Range(minSpawnTime, maxSpawnTime);
@@ -57,12 +59,9 @@ public class AnomalyManager : MonoBehaviour
                     }
                 }
 
-                if (inactiveAnomalies.Count > 0)
-                {
-                    inactiveAnomalies[Random.Range(0, inactiveAnomalies.Count)].Activate();
-                }
-
             }
+            if (inactiveAnomalies.Count > 0)
+                inactiveAnomalies[Random.Range(0, inactiveAnomalies.Count)].Activate();
 
         }
     }
