@@ -6,11 +6,12 @@ public class PlayerCCTVState : PlayerState
     {
     }
 
+    private CCTVStation currentStation;
+
     public override void Enter()
     {
         base.Enter();
         player.movement.Stop();
-        player.cctvView.Show();
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -23,14 +24,18 @@ public class PlayerCCTVState : PlayerState
 
         if(input.Player.Exit.WasPerformedThisFrame())
         {
-            stateMachine.ChangeState(player.freeState);
+            stateMachine.ChangeState(player.officeState);
         }
+    }
+    public void SetStation(CCTVStation station)
+    {
+        currentStation = station;
     }
 
     public override void Exit()
     {
         base.Exit();
-
-        player.cctvView.Hide();
+        currentStation?.CloseCCTV();
+        currentStation = null;
     }
 }

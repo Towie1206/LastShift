@@ -6,7 +6,7 @@ public class MaintenanceStation : MonoBehaviour, IInteractable
 {
     [SerializeField] private Player player;
     [SerializeField] private CinemachineCamera cinemachineCamera;
-    [SerializeField] private float cameraBlendDuration = 1.5f;
+    [SerializeField] private float cameraBlendDuration;
     [SerializeField] private int monitorPriority = 20;
     [SerializeField] private MaintenanceView maintenanceView;
 

@@ -7,7 +7,7 @@ public class QuanLyInteract : MonoBehaviour, IInteractable
     [SerializeField] private DialogueController controller;
     [SerializeField] private Player player;
 
-    [Header("Dịch chuyển & Bắt đầu ca trực")]
+    [Header("Dich chuyen & Bat dau ca truc")]
     [SerializeField] private Transform securityRoomSpawnPoint;
     [SerializeField] private ShiftClock clock;
     [SerializeField] private AnomalyManager anomalyManager;
@@ -32,11 +32,9 @@ public class QuanLyInteract : MonoBehaviour, IInteractable
         Rigidbody rb = player.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            // Ép vị trí và góc xoay bằng Rigidbody
             rb.position = securityRoomSpawnPoint.position;
             rb.rotation = securityRoomSpawnPoint.rotation;
 
-            // Xóa sạch quán tính để Player không bị trượt đi
             rb.linearVelocity = Vector3.zero;
         }
         else
@@ -45,7 +43,13 @@ public class QuanLyInteract : MonoBehaviour, IInteractable
             player.transform.rotation = securityRoomSpawnPoint.rotation;
         }
 
-        player.ExitDialogue();
+        OfficeViewManager viewManager = player.GetComponent<OfficeViewManager>();
+        if (viewManager != null)
+        {
+            viewManager.ResetToFront();
+        }
+
+        player.EnterOffice();
 
         clock.enabled = true;
         anomalyManager.StartShift();

@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlayerInteractor : MonoBehaviour
 {
     [SerializeField] private Camera playerCamera;
-    [SerializeField] private float interactDistance = 3f;
+    [SerializeField] private float interactDistance = 3f; //fps
+    [SerializeField] private float interactDistanceClick = 5f; //tpp
     [SerializeField] private LayerMask interactableLayer;
 
 
@@ -16,6 +17,16 @@ public class PlayerInteractor : MonoBehaviour
         {
             IInteractable interactable =hitInfo.collider.GetComponentInParent<IInteractable>();
 
+            interactable?.Interact();
+        }
+    }    
+
+    public void TryToInteractFromCursor(Vector2 mouseScreenPos)
+    {
+        Ray ray = playerCamera.ScreenPointToRay(mouseScreenPos);
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactDistanceClick, interactableLayer))
+        {
+            IInteractable interactable = hitInfo.collider.GetComponentInParent<IInteractable>();
             interactable?.Interact();
         }
     }    

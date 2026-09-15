@@ -14,12 +14,11 @@ public class Player : MonoBehaviour
     public PlayerLetterState letterState { get; private set; }
     public PlayerDialogueState dialogueState { get; private set; }
     public PlayerComputerState computerState { get; private set; }
+    public PlayerOfficeState officeState { get; private set; }
 
-    [SerializeField] private CCTVView cctvViewReference;
     [SerializeField] private Transform holdPointReference;
     [SerializeField] private DialogueController dialogueControllerReference;
     public Transform holdPoint => holdPointReference;
-    public CCTVView cctvView => cctvViewReference;
     public DialogueController dialogueController => dialogueControllerReference;
 
     public Vector2 moveInput { get; private set; }
@@ -37,6 +36,7 @@ public class Player : MonoBehaviour
         letterState = new PlayerLetterState(this, stateMachine);
         dialogueState = new PlayerDialogueState(this, stateMachine);
         computerState = new PlayerComputerState(this, stateMachine);
+        officeState = new PlayerOfficeState(this, stateMachine);
 
         stateMachine.Initialize(freeState);
     }
@@ -47,14 +47,9 @@ public class Player : MonoBehaviour
 
         input.Player.Look.performed += ctx => mousePosition = ctx.ReadValue<Vector2>();
         input.Player.Look.canceled += ctx => mousePosition = Vector2.zero;
-        //input just begun
-        //input.Player.Movement.started += ctx => stateMachine.ChangeState(moveState);
-        //input is performed
         input.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>(); //ctx = context
-        //input stoped,when you release the key
         input.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
-        // Bắt sự kiện bấm nút Esc
         input.Player.Exit.performed += OnExitPressed;
     }
 
@@ -85,7 +80,7 @@ public class Player : MonoBehaviour
 
     public void ExitCCTV()
     {
-        stateMachine.ChangeState(freeState);
+        stateMachine.ChangeState(officeState);
     }    
 
     public void OpenLetter (LetterStation letter)
@@ -96,7 +91,7 @@ public class Player : MonoBehaviour
 
     public void CloseLetter ()
     {
-        stateMachine.ChangeState(freeState);
+        stateMachine.ChangeState(officeState);
     } 
 
     public void EnterDialogue()
@@ -115,7 +110,12 @@ public class Player : MonoBehaviour
 
     public void ExitComputer()
     {
-        stateMachine.ChangeState(freeState);
+        stateMachine.ChangeState(officeState);
+    }
+
+    public void EnterOffice()
+    {
+        stateMachine.ChangeState(officeState);
     }
 
 

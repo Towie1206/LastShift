@@ -18,7 +18,7 @@ public class PlayerFreeState : PlayerState
     {
         base.Update();
         player.movement.SetMoveInput(player.moveInput);
-        player.look.Look(player.mousePosition);
+        player.look.Look(input.Player.Look.ReadValue<Vector2>());
 
         if(input.Player.Interact.WasPerformedThisFrame())
         {
