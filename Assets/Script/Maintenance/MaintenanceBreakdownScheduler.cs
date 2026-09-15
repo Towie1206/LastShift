@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MaintenanceBreakdownScheduler : MonoBehaviour
@@ -24,19 +25,20 @@ public class MaintenanceBreakdownScheduler : MonoBehaviour
             float waitTime = Random.Range(minCheckInterval, maxCheckInterval);
             yield return new WaitForSeconds(waitTime);
 
-            // Tung xúc xắc, nếu trúng thì hỏng 1 hệ thống ngẫu nhiên đang online
+            // breakdownChance = 0.3 nghĩa là 30% cơ hội
             if (Random.value <= breakdownChance)
             {
-                BreakRandomOnlineSystem();
+                BreakRandomOnlineSystem();// Tung xúc xắc, nếu trúng thì hỏng 1 hệ thống ngẫu nhiên đang online
             }
         }
     }
 
     private void BreakRandomOnlineSystem()
     {
-        // Thu thập các hệ thống đang online
-        System.Collections.Generic.List<SubSystem> onlineSystems = new System.Collections.Generic.List<SubSystem>();
-        
+        // Tạo 1 danh sách rỗng
+        List<SubSystem> onlineSystems = new List<SubSystem>();
+
+        // Kiểm tra từng hệ thống, nếu đang Online thì bỏ vào danh sách
         if (maintenanceSystem.IsOnline(SubSystem.CameraDevices)) onlineSystems.Add(SubSystem.CameraDevices);
         if (maintenanceSystem.IsOnline(SubSystem.Lighting)) onlineSystems.Add(SubSystem.Lighting);
         if (maintenanceSystem.IsOnline(SubSystem.Electricity)) onlineSystems.Add(SubSystem.Electricity);

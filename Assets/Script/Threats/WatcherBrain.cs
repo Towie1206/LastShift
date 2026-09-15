@@ -30,24 +30,20 @@ public class WatcherBrain : MonoBehaviour
     }
 
     [ContextMenu("test wrong response")]
-    private void ReportWrongResponse()
+    public void ReportWrongResponse()
     {
         ProcessThreatTrigger(1);
     }
 
     private void ProcessThreatTrigger(float threatAmount)
     {
-        WatcherLocation currentLocation =
-            movement.GetCurrentLocation();
+        WatcherLocation currentLocation = movement.GetCurrentLocation();
 
-        if (currentLocation != null &&
-            currentLocation.IsAttackLocation())
-        {
+        if (currentLocation != null && currentLocation.IsAttackLocation())
             return;
-        }
 
         threatLevel += threatAmount;
-
+            
         if (threatLevel >= threatLevelRequiredAttack)
         {
             movement.MoveTo(attackLocation);

@@ -3,51 +3,56 @@ using UnityEngine;
 
 public class ShiftClock : MonoBehaviour
 {
-    public event Action<int> hourChanged;
+    public event Action<int, int> timeChanged;
     public event Action shiftCompleted;
 
-    [SerializeField] private float secondsPerHour = 90f;
     [SerializeField] private int startHour = 23;
+    [SerializeField] private int startMinute = 30;
     [SerializeField] private int shiftDurationInHour = 7;
 
     public int currentHour { get; private set; }
+    public int currentMinute { get; private set; }
 
     private float timer;
-    private int elapsedHours;
+    private int elapsedGameMinutes;
     private bool isCompleted;
 
     private void Awake()
     {
         currentHour = startHour;
+        currentMinute = startMinute;
     }
 
     private void Start()
     {
-        hourChanged?.Invoke(currentHour);
+        timeChanged?.Invoke(currentHour, currentMinute);
     }
 
     private void Update()
     {
-        if (isCompleted)
-            return;
-
+        if (isCompleted) return;
         timer += Time.deltaTime;
-
-        if (timer < secondsPerHour)
-            return;
-
-        timer -= secondsPerHour;
-        AdvanceHour();
+        // Cứ mỗi 1,5 giây ngoài đời thì nhảy 1 phút
+        if (timer >= 1.5f)
+        {
+            timer -= 1.5f;
+            AdvanceMinute();
+        }
     }
 
-    private void AdvanceHour()
+    private void AdvanceMinute()
     {
-        elapsedHours++;
-        currentHour = (startHour + elapsedHours) % 24; //1 ngày có 24 giờ chia lấy dư
+        elapsedGameMinutes++;
+        currentMinute++;
 
-        hourChanged?.Invoke(currentHour);
+        if (currentMinute >= 60)
+        {
+            currentMinute = 0;
+            currentHour = (currentHour + 1) % 24;
+        }
+        timeChanged?.Invoke(currentHour, currentMinute);
 
-        if(elapsedHours >= shiftDurationInHour)
+        if (elapsedGameMinutes >= shiftDurationInHour * 60)
         {
             isCompleted = true;
             shiftCompleted?.Invoke();

@@ -12,23 +12,19 @@ public class MaintenanceSystem : MonoBehaviour
     [SerializeField, Min(1f)] private float rebootAllDuration = 10f;
 
     [Header("Air Cleaner Countdown")]
-    [SerializeField, Min(10f)] private float airCleanerDeadline = 60f;
+    [SerializeField, Min(10f)] private float electricityDeadline = 60f;
 
     /// Phát khi trạng thái 1 hệ thống thay đổi.
     /// Param 1: loại hệ thống. Param 2: true = online, false = error.
     public event Action<SubSystem, bool> SubSystemChanged;
-
-    /// Phát khi bắt đầu reboot (để UI hiện progress bar).
-    /// Param 1: loại hệ thống. Param 2: thời gian reboot (giây).
-    public event Action<SubSystem, float> RebootStarted;
 
     /// Phát khi Air Cleaner hết giờ → Bad Ending.
     public event Action ElectricityExpired;
 
     private bool[] isOnline = new bool[3];
     private bool[] isRebooting = new bool[3];
-    private float airCleanerTimer;
-    private bool airCleanerCounting;
+    private float electricityTimer;
+    private bool electricityCounting;
     private bool isRebootingAll = false;
 
     private void Awake()
@@ -42,14 +38,14 @@ public class MaintenanceSystem : MonoBehaviour
 
     private void Update()
     {
-        if (!airCleanerCounting)
+        if (!electricityCounting)
             return;
 
-        airCleanerTimer -= Time.deltaTime;
+        electricityTimer -= Time.deltaTime;
 
-        if (airCleanerTimer <= 0f)
+        if (electricityTimer <= 0f)
         {
-            airCleanerCounting = false;
+            electricityCounting = false;
             ElectricityExpired?.Invoke();
         }
     }
@@ -66,12 +62,12 @@ public class MaintenanceSystem : MonoBehaviour
 
     public float GetElectricityTimeLeft()
     {
-        return airCleanerCounting ? Mathf.Max(0f, airCleanerTimer) : -1f;
+        return electricityCounting ? Mathf.Max(0f, electricityTimer) : -1f;
     }
 
     public float GetElectricityDeadline()
     {
-        return airCleanerDeadline;
+        return electricityDeadline;
     }
 
     /// Gây hỏng 1 hệ thống. Nếu đang online thì chuyển sang error.
@@ -96,8 +92,8 @@ public class MaintenanceSystem : MonoBehaviour
 
         if (system == SubSystem.Electricity)
         {
-            airCleanerTimer = airCleanerDeadline;
-            airCleanerCounting = true;
+            electricityTimer = electricityDeadline;
+            electricityCounting = true;
         }
 
         SubSystemChanged?.Invoke(system, false);
@@ -108,7 +104,7 @@ public class MaintenanceSystem : MonoBehaviour
     {
         int index = (int)system;
 
-        if (isOnline[index] || isRebooting[index] || isRebootingAll)
+        if (isRebooting[index] || isRebootingAll)
             return;
 
         StartCoroutine(RebootRoutine(system, rebootDuration));
@@ -127,11 +123,7 @@ public class MaintenanceSystem : MonoBehaviour
 
         for (int i = 0; i < isOnline.Length; i++)
         {
-            if (!isOnline[i])
-            {
-                isRebooting[i] = true;
-                RebootStarted?.Invoke((SubSystem)i, rebootAllDuration);
-            }
+            isRebooting[i] = true;
         }
 
         yield return new WaitForSeconds(rebootAllDuration);
@@ -140,18 +132,15 @@ public class MaintenanceSystem : MonoBehaviour
 
         for (int i = 0; i < isOnline.Length; i++)
         {
-            if (!isOnline[i])
+            isRebooting[i] = false;
+            isOnline[i] = true;
+            
+            if ((SubSystem)i == SubSystem.Electricity)
             {
-                isRebooting[i] = false;
-                isOnline[i] = true;
-                
-                if ((SubSystem)i == SubSystem.Electricity)
-                {
-                    airCleanerCounting = false;
-                }
-                
-                SubSystemChanged?.Invoke((SubSystem)i, true);
+                electricityCounting = false;
             }
+            
+            SubSystemChanged?.Invoke((SubSystem)i, true);
         }
     }
 
@@ -160,8 +149,6 @@ public class MaintenanceSystem : MonoBehaviour
         int index = (int)system;
         isRebooting[index] = true;
 
-        RebootStarted?.Invoke(system, rebootDuration);
-
         yield return new WaitForSeconds(rebootDuration);
 
         isRebooting[index] = false;
@@ -169,7 +156,7 @@ public class MaintenanceSystem : MonoBehaviour
 
         if (system == SubSystem.Electricity)
         {
-            airCleanerCounting = false;
+            electricityCounting = false;
         }
 
         SubSystemChanged?.Invoke(system, true);
