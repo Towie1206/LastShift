@@ -41,7 +41,7 @@ public class MaintenanceBreakdownScheduler : MonoBehaviour
         // Kiểm tra từng hệ thống, nếu đang Online thì bỏ vào danh sách
         if (maintenanceSystem.IsOnline(SubSystem.CameraDevices)) onlineSystems.Add(SubSystem.CameraDevices);
         if (maintenanceSystem.IsOnline(SubSystem.Lighting)) onlineSystems.Add(SubSystem.Lighting);
-        if (maintenanceSystem.IsOnline(SubSystem.Electricity)) onlineSystems.Add(SubSystem.Electricity);
+        if (maintenanceSystem.IsOnline(SubSystem.Ventilation)) onlineSystems.Add(SubSystem.Ventilation);
 
         if (onlineSystems.Count > 0)
         {

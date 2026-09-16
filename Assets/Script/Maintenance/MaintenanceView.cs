@@ -32,7 +32,7 @@ public class MaintenanceView : MonoBehaviour
     {
         cameraBtn.onClick.AddListener(() => StartReboot(SubSystem.CameraDevices, cameraStatusText));
         lightingBtn.onClick.AddListener(() => StartReboot(SubSystem.Lighting, lightingStatusText));
-        airCleanerBtn.onClick.AddListener(() => StartReboot(SubSystem.Electricity, airCleanerStatusText));
+        airCleanerBtn.onClick.AddListener(() => StartReboot(SubSystem.Ventilation, airCleanerStatusText));
         
         rebootAllBtn.onClick.AddListener(StartRebootAll);
         exitBtn.onClick.AddListener(() => ExitRequested?.Invoke());
@@ -56,7 +56,7 @@ public class MaintenanceView : MonoBehaviour
         maintenancePanel.SetActive(true);
         RefreshUI(SubSystem.CameraDevices, cameraStatusText);
         RefreshUI(SubSystem.Lighting, lightingStatusText);
-        RefreshUI(SubSystem.Electricity, airCleanerStatusText);
+        RefreshUI(SubSystem.Ventilation, airCleanerStatusText);
         
         if (rebootAllStatusText != null)
         {
@@ -86,7 +86,7 @@ public class MaintenanceView : MonoBehaviour
         
         StartCoroutine(LoadingAnimationRoutine(SubSystem.CameraDevices, cameraStatusText));
         StartCoroutine(LoadingAnimationRoutine(SubSystem.Lighting, lightingStatusText));
-        StartCoroutine(LoadingAnimationRoutine(SubSystem.Electricity, airCleanerStatusText));
+        StartCoroutine(LoadingAnimationRoutine(SubSystem.Ventilation, airCleanerStatusText));
 
         if (rebootAllStatusText != null)
         {
@@ -125,7 +125,7 @@ public class MaintenanceView : MonoBehaviour
         
         while (maintenanceSystem.IsRebooting(SubSystem.CameraDevices) || 
                maintenanceSystem.IsRebooting(SubSystem.Lighting) || 
-               maintenanceSystem.IsRebooting(SubSystem.Electricity))
+               maintenanceSystem.IsRebooting(SubSystem.Ventilation))
         {
             dotCount++;
             if (dotCount > 4) dotCount = 1;
@@ -144,7 +144,7 @@ public class MaintenanceView : MonoBehaviour
     {
         if (system == SubSystem.CameraDevices) RefreshUI(system, cameraStatusText);
         if (system == SubSystem.Lighting) RefreshUI(system, lightingStatusText);
-        if (system == SubSystem.Electricity) RefreshUI(system, airCleanerStatusText);
+        if (system == SubSystem.Ventilation) RefreshUI(system, airCleanerStatusText);
 
         UnpdateExitButtonState();
     }
@@ -169,7 +169,7 @@ public class MaintenanceView : MonoBehaviour
     {
         bool isAnyRebooting = maintenanceSystem.IsRebooting(SubSystem.CameraDevices) ||
                               maintenanceSystem.IsRebooting(SubSystem.Lighting) ||
-                              maintenanceSystem.IsRebooting(SubSystem.Electricity);
+                              maintenanceSystem.IsRebooting(SubSystem.Ventilation);
 
         exitBtn.interactable = !isAnyRebooting;
     }

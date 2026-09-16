@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public enum SubSystem { CameraDevices, Lighting, Electricity }
+public enum SubSystem { CameraDevices, Lighting, Ventilation }
 
 public class MaintenanceSystem : MonoBehaviour
 {
@@ -12,19 +12,19 @@ public class MaintenanceSystem : MonoBehaviour
     [SerializeField, Min(1f)] private float rebootAllDuration = 10f;
 
     [Header("Air Cleaner Countdown")]
-    [SerializeField, Min(10f)] private float electricityDeadline = 60f;
+    [SerializeField, Min(10f)] private float ventilationDeadline = 60f;
 
     /// Phát khi trạng thái 1 hệ thống thay đổi.
     /// Param 1: loại hệ thống. Param 2: true = online, false = error.
     public event Action<SubSystem, bool> SubSystemChanged;
 
     /// Phát khi Air Cleaner hết giờ → Bad Ending.
-    public event Action ElectricityExpired;
+    public event Action VentilationExpired;
 
     private bool[] isOnline = new bool[3];
     private bool[] isRebooting = new bool[3];
-    private float electricityTimer;
-    private bool electricityCounting;
+    private float ventilationTimer;
+    private bool ventilationCounting;
     private bool isRebootingAll = false;
 
     private void Awake()
@@ -38,15 +38,15 @@ public class MaintenanceSystem : MonoBehaviour
 
     private void Update()
     {
-        if (!electricityCounting)
+        if (!ventilationCounting)
             return;
 
-        electricityTimer -= Time.deltaTime;
+        ventilationTimer -= Time.deltaTime;
 
-        if (electricityTimer <= 0f)
+        if (ventilationTimer <= 0f)
         {
-            electricityCounting = false;
-            ElectricityExpired?.Invoke();
+            ventilationCounting = false;
+            VentilationExpired?.Invoke();
         }
     }
 
@@ -60,14 +60,9 @@ public class MaintenanceSystem : MonoBehaviour
         return isRebooting[(int)system] || isRebootingAll;
     }
 
-    public float GetElectricityTimeLeft()
+    public float GetVentilationTimeLeft()
     {
-        return electricityCounting ? Mathf.Max(0f, electricityTimer) : -1f;
-    }
-
-    public float GetElectricityDeadline()
-    {
-        return electricityDeadline;
+        return ventilationCounting ? Mathf.Max(0f, ventilationTimer) : -1f;
     }
 
     /// Gây hỏng 1 hệ thống. Nếu đang online thì chuyển sang error.
@@ -78,7 +73,7 @@ public class MaintenanceSystem : MonoBehaviour
     private void BreakLighting() => BreakSubSystem(SubSystem.Lighting);
 
     [ContextMenu("Break Electricity")]
-    private void BreakElectricity() => BreakSubSystem(SubSystem.Electricity);
+    private void BreakVentilation() => BreakSubSystem(SubSystem.Ventilation);
 
     public void BreakSubSystem(SubSystem system)
     {
@@ -90,10 +85,10 @@ public class MaintenanceSystem : MonoBehaviour
         isOnline[index] = false;
         isRebooting[index] = false;
 
-        if (system == SubSystem.Electricity)
+        if (system == SubSystem.Ventilation)
         {
-            electricityTimer = electricityDeadline;
-            electricityCounting = true;
+            ventilationTimer = ventilationDeadline;
+            ventilationCounting = true;
         }
 
         SubSystemChanged?.Invoke(system, false);
@@ -135,9 +130,9 @@ public class MaintenanceSystem : MonoBehaviour
             isRebooting[i] = false;
             isOnline[i] = true;
             
-            if ((SubSystem)i == SubSystem.Electricity)
+            if ((SubSystem)i == SubSystem.Ventilation)
             {
-                electricityCounting = false;
+                ventilationCounting = false;
             }
             
             SubSystemChanged?.Invoke((SubSystem)i, true);
@@ -154,9 +149,9 @@ public class MaintenanceSystem : MonoBehaviour
         isRebooting[index] = false;
         isOnline[index] = true;
 
-        if (system == SubSystem.Electricity)
+        if (system == SubSystem.Ventilation)
         {
-            electricityCounting = false;
+            ventilationCounting = false;
         }
 
         SubSystemChanged?.Invoke(system, true);
