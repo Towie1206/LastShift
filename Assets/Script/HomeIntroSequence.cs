@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class HomeIntroSequence : MonoBehaviour
 {
-    [SerializeField] private Player player;
     [SerializeField] private DialogueController dialogueController;
     [SerializeField] private DialogueData data;
     [SerializeField] private CurtainTransition curtainTransition;
@@ -12,7 +11,6 @@ public class HomeIntroSequence : MonoBehaviour
     private void Start()
     {
         dialogueController.Completed += HandleCompletedIntro;
-        player.EnterDialogue();
         dialogueController.Play(data);
     }
 
@@ -20,6 +18,5 @@ public class HomeIntroSequence : MonoBehaviour
     {
         dialogueController.Completed -= HandleCompletedIntro;
         coroutine = StartCoroutine(curtainTransition.OpenEyes());
-        player.ExitDialogue();
     }
 }

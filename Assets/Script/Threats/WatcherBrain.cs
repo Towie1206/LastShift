@@ -7,6 +7,7 @@ public class WatcherBrain : MonoBehaviour
     [SerializeField] private WatcherMovement movement;
     [SerializeField] private WatcherLocation attackLocation;
     [SerializeField] private WatcherAttack attack;
+    [SerializeField] private AnomalyManager anomalyManager;
 
     [SerializeField, Min(1)]
     private int threatLevelRequiredAttack = 4;
@@ -17,11 +18,15 @@ public class WatcherBrain : MonoBehaviour
     {
         observation.IgnoredTooLong += HandleIgnoredTooLong;
         attack.Blocked += HandleAttackBlocked;
+        anomalyManager.OnReportWrong += ReportWrongResponse;
+
+
     }
     private void OnDisable()
     {
         observation.IgnoredTooLong -= HandleIgnoredTooLong;
         attack.Blocked -= HandleAttackBlocked;
+        anomalyManager.OnReportWrong -= ReportWrongResponse;
     }
 
     private void HandleIgnoredTooLong()

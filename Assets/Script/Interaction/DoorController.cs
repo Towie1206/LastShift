@@ -4,7 +4,7 @@ public class DoorController : MonoBehaviour, IInteractable
 {
     [SerializeField] private Door door;
 
-    public void Interact()
+    public void Interact(Player player)
     {
         door.DoorToggle();
     }

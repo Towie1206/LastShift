@@ -8,6 +8,7 @@ public class DialogueController : MonoBehaviour
 
     private bool isRunning;
     private int currentLineIndex;
+    public event Action Started;
     public event Action Completed;
 
     public void Play(DialogueData data)
@@ -19,6 +20,7 @@ public class DialogueController : MonoBehaviour
         currentLineIndex = 0;
         view.Show();
         view.TypeLine(currentData.GetLine(currentLineIndex));
+        Started?.Invoke();
     }
 
     public void Advance()

@@ -7,6 +7,12 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] private float interactDistanceClick = 5f; //tpp
     [SerializeField] private LayerMask interactableLayer;
 
+    private Player player;
+    private void Awake()
+    {
+        player = GetComponent<Player>();
+    }
+
 
     public void TryToInteract()
     {
@@ -17,7 +23,7 @@ public class PlayerInteractor : MonoBehaviour
         {
             IInteractable interactable =hitInfo.collider.GetComponentInParent<IInteractable>();
 
-            interactable?.Interact();
+            interactable?.Interact(player);
         }
     }    
 
@@ -27,7 +33,7 @@ public class PlayerInteractor : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hitInfo, interactDistanceClick, interactableLayer))
         {
             IInteractable interactable = hitInfo.collider.GetComponentInParent<IInteractable>();
-            interactable?.Interact();
+            interactable?.Interact(player);
         }
     }    
     private void OnDrawGizmos()

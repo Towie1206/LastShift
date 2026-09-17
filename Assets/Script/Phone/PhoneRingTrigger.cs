@@ -6,7 +6,6 @@ public class PhoneRingTrigger : MonoBehaviour
     [SerializeField] private PhoneStation phoneStation;
     [SerializeField] private DialogueController dialogueController;
     [SerializeField] private DialogueData data;
-    [SerializeField] private Player player;
     private bool hasTriggered = false;
     private Collider collider;
 
@@ -23,7 +22,6 @@ public class PhoneRingTrigger : MonoBehaviour
             collider.enabled = false;
             hasTriggered = true;
             dialogueController.Completed += HandleEnd;
-            player.EnterDialogue();
             phoneStation.StartRinging();
             dialogueController.Play(data);
         }    
@@ -32,7 +30,6 @@ public class PhoneRingTrigger : MonoBehaviour
     private void HandleEnd()
     {
         dialogueController.Completed -= HandleEnd;
-        player.ExitDialogue();
         gameObject.SetActive(false);
     }
 }

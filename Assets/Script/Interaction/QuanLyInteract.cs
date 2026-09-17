@@ -17,11 +17,10 @@ public class QuanLyInteract : MonoBehaviour, IInteractable
     {
         clock.enabled = false;
     }
-    public void Interact()
+    public void Interact(Player player)
     {
+        if (this.player == null) this.player = player;
         controller.Completed += HandleDialogueCompleted;
-        
-        player.EnterDialogue();
         controller.Play(data);
     }
 

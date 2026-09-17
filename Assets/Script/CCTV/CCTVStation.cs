@@ -5,16 +5,14 @@ using UnityEngine;
 public class CCTVStation : MonoBehaviour, IInteractable
 {
 
-    [SerializeField] private Player player;
     [SerializeField] private CinemachineCamera cinemachineCamera;
     [SerializeField] private float cameraBlendDuration;
     [SerializeField] private int monitorPriority = 20;
     [SerializeField] private CCTVView cctvView;
 
-    public void Interact()
+    public void Interact(Player player)
     {
-        player.cctvState.SetStation(this);
-        player.stateMachine.ChangeState(player.cctvState);
+        player.EnterCCTV(this);
         cinemachineCamera.Priority = monitorPriority;
 
         StartCoroutine(OpenMaintenanceAfterBlend());

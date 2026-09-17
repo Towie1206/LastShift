@@ -1,52 +1,46 @@
+using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 
 public class MaintenanceStation : MonoBehaviour, IInteractable
 {
-    [SerializeField] private Player player;
     [SerializeField] private CinemachineCamera cinemachineCamera;
     [SerializeField] private float cameraBlendDuration;
     [SerializeField] private int monitorPriority = 20;
     [SerializeField] private MaintenanceView maintenanceView;
 
-    private bool isRunning;
+    // 👈 Bắn tín hiệu ra ngoài khi máy tính bị đóng
+    public event Action OnStationClosed;
 
-    private void OnEnable()
+    private void OnEnable() => maintenanceView.ExitRequested += Close;
+    private void OnDisable() => maintenanceView.ExitRequested -= Close;
+
+    // Khi người chơi bấm vào máy:
+    public void Interact(Player player)
     {
-        maintenanceView.ExitRequested += HandleExit;
+        // Nhờ Player tự đưa mình vào trạng thái dùng máy tính
+        player.UseMaintenanceComputer(this);
     }
 
-    private void OnDisable()
+    public void Open()
     {
-        maintenanceView.ExitRequested -= HandleExit;
-    }
-
-    public void Interact()
-    {
-        if (isRunning)
-            return;
-
-        isRunning = true;
-
-        player.EnterComputer();
         cinemachineCamera.Priority = monitorPriority;
-
         StartCoroutine(OpenMaintenanceAfterBlend());
+    }
+
+    public void Close()
+    {
+        maintenanceView.Hide();
+        cinemachineCamera.Priority = 0;
+
+        // Báo cho ai đang theo dõi biết: "Tôi đã đóng xong!"
+        OnStationClosed?.Invoke();
     }
 
     private IEnumerator OpenMaintenanceAfterBlend()
     {
         yield return new WaitForSeconds(cameraBlendDuration);
-
         maintenanceView.Show();
-    }
-
-    private void HandleExit()
-    {
-        maintenanceView.Hide();
-        cinemachineCamera.Priority = 0;
-        player.ExitComputer();
-        isRunning = false;
     }
 }

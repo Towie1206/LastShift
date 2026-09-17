@@ -13,6 +13,7 @@ public class PlayerDialogueState : PlayerState
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
+
     public override void Update()
     {
         base.Update();

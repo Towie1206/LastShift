@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 public class LetterStation : MonoBehaviour, IInteractable
 {
-    [SerializeField] private Player player;
 
     private Collider letterCollider;
 
@@ -19,7 +18,7 @@ public class LetterStation : MonoBehaviour, IInteractable
         letterCollider = GetComponent<Collider>();
     }
 
-    public void Interact()
+    public void Interact(Player player)
     {
         player.OpenLetter(this);
     }

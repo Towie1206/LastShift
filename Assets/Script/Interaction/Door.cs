@@ -2,12 +2,10 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private GameObject Light;
     [SerializeField] private Vector3 openPos;
     [SerializeField] private Vector3 closePos;
     [SerializeField] private float speed;
     [SerializeField] bool isOpen;
-    [SerializeField] bool isOn;
 
     private void Start()
     {
@@ -17,7 +15,6 @@ public class Door : MonoBehaviour
     private void Update()
     {
         DoorControl();
-        LightControl();
     }
 
     private void DoorControl()
@@ -26,17 +23,10 @@ public class Door : MonoBehaviour
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetPos, speed * Time.deltaTime);
 
     }
-    private void LightControl()
-    {
-        Light.SetActive(isOn);
-    }
+
     public void DoorToggle()
     {
         isOpen = !isOpen;
-    }
-    public void LightToggle()
-    {
-        isOn = !isOn;
     }
 
     public bool IsFullyClosed()

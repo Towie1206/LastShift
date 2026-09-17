@@ -7,7 +7,7 @@ public class BrokenDoorButton : MonoBehaviour , IInteractable
     [SerializeField] private string interactionMessage = "DOOR CONTROL OFFLINE";
 
 
-    public void Interact()
+    public void Interact(Player player)
     {
         interactionMessageUI.Show(interactionMessage);
     }

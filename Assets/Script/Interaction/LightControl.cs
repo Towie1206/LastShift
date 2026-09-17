@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class LightControl : MonoBehaviour, IInteractable
 {
-    [SerializeField] private Door door;
+    [SerializeField] private ToggleLight light;
 
-    public void Interact()
+    public void Interact(Player player)
     {
-        door.LightToggle();
+        light.LightControl();
     }
 }

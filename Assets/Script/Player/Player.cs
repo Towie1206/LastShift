@@ -51,13 +51,24 @@ public class Player : MonoBehaviour
         input.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
         input.Player.Exit.performed += OnExitPressed;
+
+        if (dialogueController != null)
+        {
+            dialogueController.Started += EnterDialogue;
+            dialogueController.Completed += ExitDialogue;
+        }
     }
 
     private void OnDisable()
     {
-
         input.Disable();
         input.Player.Exit.performed -= OnExitPressed;
+
+        if (dialogueController != null)
+        {
+            dialogueController.Started -= EnterDialogue;
+            dialogueController.Completed -= ExitDialogue;
+        }
     }
 
     private void OnExitPressed(UnityEngine.InputSystem.InputAction.CallbackContext context)
@@ -78,6 +89,11 @@ public class Player : MonoBehaviour
         stateMachine.UpdateActiveState();
     }
 
+    public void EnterCCTV(CCTVStation station)
+    {
+        cctvState.SetStation(station);
+        stateMachine.ChangeState(cctvState);
+    }
     public void ExitCCTV()
     {
         stateMachine.ChangeState(officeState);
@@ -118,5 +134,9 @@ public class Player : MonoBehaviour
         stateMachine.ChangeState(officeState);
     }
 
-
+    public void UseMaintenanceComputer(MaintenanceStation station)
+    {
+        computerState.SetStation(station);
+        stateMachine.ChangeState(computerState); // Não tự chuyển state!
+    }
 }

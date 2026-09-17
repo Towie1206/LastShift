@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,14 @@ public class AnomalyManager : MonoBehaviour
 {
     [Header("Danh sách các anomaly")]
     [SerializeField] private AnomalyObject[] anomalies;
-    [SerializeField] private WatcherBrain watcherBrain;
     [SerializeField] private ShiftClock shiftClock;
 
     [Header("Thời gian")]
     [SerializeField] private float minSpawnTime = 15f;
     [SerializeField] private float maxSpawnTime = 35f;
+
+    public event Action OnReportWrong;
+
 
     private int point = 0;
 
@@ -28,7 +31,7 @@ public class AnomalyManager : MonoBehaviour
 
         while (true)
         {
-            float waitTime = Random.Range(minSpawnTime, maxSpawnTime);
+            float waitTime = UnityEngine.Random.Range(minSpawnTime, maxSpawnTime);
             yield return new WaitForSeconds(waitTime);
             timePassed += waitTime;
             List<AnomalyObject> inactiveAnomalies = new List<AnomalyObject>();
@@ -61,7 +64,7 @@ public class AnomalyManager : MonoBehaviour
 
             }
             if (inactiveAnomalies.Count > 0)
-                inactiveAnomalies[Random.Range(0, inactiveAnomalies.Count)].Activate();
+                inactiveAnomalies[UnityEngine.Random.Range(0, inactiveAnomalies.Count)].Activate();
 
         }
     }
@@ -76,7 +79,7 @@ public class AnomalyManager : MonoBehaviour
                 return true;
             }
         }
-        watcherBrain.ReportWrongResponse();
+        OnReportWrong?.Invoke();
         return false;
     }
 

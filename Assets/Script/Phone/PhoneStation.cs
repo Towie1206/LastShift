@@ -1,11 +1,10 @@
+using System;
 using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 
 
 public class PhoneStation : MonoBehaviour, IInteractable
 {
-    [SerializeField] private Player player;
     [SerializeField] private DialogueController dialogueController;
     [SerializeField] private DialogueData data;
     [SerializeField] private Transform holdPoint;
@@ -25,7 +24,7 @@ public class PhoneStation : MonoBehaviour, IInteractable
     {
         collider = GetComponent<Collider>();
     }
-    public void Interact()
+    public void Interact(Player player)
     {
         if (!isRinging)
             return;
@@ -33,10 +32,9 @@ public class PhoneStation : MonoBehaviour, IInteractable
         isRinging = false;
         isInUse = true;
         ringing.Stop();
+
         dialogueController.Completed += HandleEnd;
         PickUp(holdPoint);
-        player.EnterDialogue();
-
     }
 
     public void StartRinging()
@@ -124,6 +122,5 @@ public class PhoneStation : MonoBehaviour, IInteractable
         collider.enabled = true;
         isInUse = false;
         moveCo = null;
-        player.ExitDialogue();
     }
 }

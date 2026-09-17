@@ -53,7 +53,7 @@ public class VentilationBreakdownEffect : MonoBehaviour
         {
             int minutes = Mathf.FloorToInt(timeLeft / 60f);
             int seconds = Mathf.FloorToInt(timeLeft % 60f);
-            timerText.text = $"VENTILATION  OFFLINE: {minutes:00}:{seconds:00}";
+            timerText.text = $"VENTILATION OFFLINE: {minutes:00}:{seconds:00}";
         }
     }
 

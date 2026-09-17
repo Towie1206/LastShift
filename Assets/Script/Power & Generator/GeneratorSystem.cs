@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GeneratorSystem : MonoBehaviour
 {
@@ -8,17 +8,17 @@ public class GeneratorSystem : MonoBehaviour
     [SerializeField] private float drainRate = 3f;
     [SerializeField] private float rechargeRate = 10f;
 
-    [Header("UI")]
-    [SerializeField] private Image powerCircle;
+    public event Action<float> OnPowerChanged;
 
     private float currentPower;
     private bool isGeneratorActive = false;
     private bool isRecharging = false;
 
+
     public void StartGenerator()
     {
         currentPower = maxPower;
-        powerCircle.fillAmount = currentPower / maxPower;
+        OnPowerChanged?.Invoke(currentPower / maxPower);
         isGeneratorActive = true;
     }
 
@@ -33,7 +33,7 @@ public class GeneratorSystem : MonoBehaviour
 
         currentPower = Mathf.Clamp(currentPower, 0, maxPower);
 
-        powerCircle.fillAmount = currentPower / maxPower;
+        OnPowerChanged?.Invoke(currentPower / maxPower);
 
         if (currentPower <= 0)
         {
