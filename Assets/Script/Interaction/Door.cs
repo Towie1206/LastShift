@@ -5,7 +5,8 @@ public class Door : MonoBehaviour
     [SerializeField] private Vector3 openPos;
     [SerializeField] private Vector3 closePos;
     [SerializeField] private float speed;
-    [SerializeField] bool isOpen;
+    private bool isOpen = true;
+    public bool DoorCheck() => isOpen;
 
     private void Start()
     {

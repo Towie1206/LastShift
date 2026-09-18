@@ -11,8 +11,9 @@ public class OfficeViewManager : MonoBehaviour
 
     [Header("Speed")]
     [SerializeField] private float rotationSpeed = 15f;
-    private enum OfficeView { Front, Right, Back, Left }
+    public enum OfficeView { Front, Right, Back, Left }
     private OfficeView currentView = OfficeView.Front;
+    public OfficeView CurrentView() => currentView;
 
     private Transform targetView;
     private bool isRotating = false;

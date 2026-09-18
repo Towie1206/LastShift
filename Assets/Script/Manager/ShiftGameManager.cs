@@ -63,16 +63,24 @@ public class ShiftGameManager : MonoBehaviour
 
     private void HandleGameOver()
     {
+        player.ForceOfficeView();
+
+        var currentView = officeViewManager.CurrentView();
+
+        watcherAttack.PerformJumpscare(currentView);
+
         StartCoroutine(waitJumpScared());
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
     private IEnumerator waitJumpScared()
     {
         yield return new WaitForSeconds(2f);
+
         gameOverUI.SetActive(true);
         Time.timeScale = 0f; // Tạm dừng trò chơi
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void RestartShift()

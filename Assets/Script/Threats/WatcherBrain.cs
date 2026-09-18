@@ -18,15 +18,15 @@ public class WatcherBrain : MonoBehaviour
     {
         observation.IgnoredTooLong += HandleIgnoredTooLong;
         attack.Blocked += HandleAttackBlocked;
-        anomalyManager.OnReportWrong += ReportWrongResponse;
-
-
+        if (anomalyManager != null)
+            anomalyManager.OnReportWrong += ReportWrongResponse;
     }
     private void OnDisable()
     {
         observation.IgnoredTooLong -= HandleIgnoredTooLong;
         attack.Blocked -= HandleAttackBlocked;
-        anomalyManager.OnReportWrong -= ReportWrongResponse;
+        if (anomalyManager != null)
+            anomalyManager.OnReportWrong -= ReportWrongResponse;
     }
 
     private void HandleIgnoredTooLong()

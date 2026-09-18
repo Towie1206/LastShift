@@ -1,14 +1,18 @@
 using System;
 using UnityEngine;
+using static OfficeViewManager;
 
 public class WatcherAttack : MonoBehaviour
 {
     [SerializeField] private Door rightDoor;
     [SerializeField] private float standDuration = 5f;
 
-    [Header("JUMPSCARE SETUP")]
     [SerializeField] private Animator anim;
-    [SerializeField] private Transform animatronicTransform;
+    [SerializeField] private Transform freedyTransform;
+    [SerializeField] private Transform deskJumpscarePoint;
+    [SerializeField] private Transform maintanceJumpscarePoint;
+    [SerializeField] private Transform leftDoorJumpscarePoint;
+    [SerializeField] private Transform rightDoorJumpscarePoint;
     [SerializeField] private AudioSource jumpscareSound;// Tiếng thét
 
     private float timer;
@@ -35,7 +39,6 @@ public class WatcherAttack : MonoBehaviour
         else
         {
             // Toang: Cửa chưa đóng kịp -> Jumpscare!
-            TriggerJumpscare();
             PlayerCaught?.Invoke();
         }
 
@@ -50,27 +53,44 @@ public class WatcherAttack : MonoBehaviour
         isAttacking = true;
     }
 
-    // Nút thần thánh để Test Jumpscare ngay lập tức
-    [ContextMenu("💥 TEST JUMPSCARE NGAY VÀ LUÔN 💥")]
-    public void TriggerJumpscare()
+    public void PerformJumpscare(OfficeViewManager.OfficeView view)
     {
-        // 1. Tìm Camera của người chơi (Đảm bảo Camera của em có Tag là MainCamera nhé)
-        Transform playerCam = Camera.main.transform;
 
-        // 2. Dịch chuyển Bonnie ra thẳng trước mặt màn hình Player (cách 1.2 mét)
-        animatronicTransform.position = playerCam.position + playerCam.forward * 1.2f - Vector3.up * 0.5f;
+        Transform targetPoint = deskJumpscarePoint;
 
-        // 3. Ép nó quay mặt nhìn trừng trừng vào người chơi
-        Vector3 lookPos = playerCam.position;
-        lookPos.y = animatronicTransform.position.y; // Giữ cho nó đứng thẳng không bị ngửa ngửa
-        animatronicTransform.LookAt(lookPos);
+        switch (view)
+        {
+            case OfficeView.Front:
+                targetPoint = deskJumpscarePoint;
+                break;
+            case OfficeView.Back:
+                targetPoint = maintanceJumpscarePoint;
+                break;
+            case OfficeView.Left:
+                targetPoint = leftDoorJumpscarePoint;
+                break;
+            case OfficeView.Right:
+                targetPoint = rightDoorJumpscarePoint;
+                break;
+        }
 
-        // 4. Bật Animation Jumpscare
-        if (anim != null) anim.Play("Jumpscare");
+        freedyTransform.position = targetPoint.position;
+        freedyTransform.rotation = targetPoint.rotation;
 
-        // 5. Bật tiếng thét
+        if (view == OfficeView.Left || view == OfficeView.Right)
+        {
+            if (anim != null) anim.Play("Freddy_Leap");
+        }
+        else // Nếu ở Bàn hoặc Bảo trì thì chơi anim cũ:
+        {
+            if (anim != null) anim.Play("Freddy_Jumpscare");
+        }
         if (jumpscareSound != null) jumpscareSound.Play();
 
-        Debug.Log("JUMPSCARE!!!! THAY QUẦN ĐI SẾP!");
     }
+    [ContextMenu("💥 TEST JUMPSCARE BAN DƯỚI 💥")]
+    public void TestDesk() => PerformJumpscare(OfficeViewManager.OfficeView.Front);
+
+    [ContextMenu("💥 TEST JUMPSCARE CỬA TRÁI 💥")]
+    public void TestLeft() => PerformJumpscare(OfficeViewManager.OfficeView.Left);
 }

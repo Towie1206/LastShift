@@ -5,6 +5,7 @@ public class ToggleLight : MonoBehaviour
     [SerializeField] private GameObject light;
 
     private bool isOn = false;
+    public bool LightCheck() => isOn;
 
     private void Start()
     {

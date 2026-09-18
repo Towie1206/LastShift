@@ -10,6 +10,8 @@ public class GeneratorSystem : MonoBehaviour
 
     public event Action<float> OnPowerChanged;
 
+    public event Action OnPowerOutage;
+
     private float currentPower;
     private bool isGeneratorActive = false;
     private bool isRecharging = false;
@@ -49,7 +51,7 @@ public class GeneratorSystem : MonoBehaviour
     {
         isGeneratorActive = false;
         Debug.Log("Power outage! Generator has run out of power.");
-        // watcherBrain.JumpScare();
+        OnPowerOutage?.Invoke();
     }
 
     public void StartGeneratorAfterDelay(float delayTime)

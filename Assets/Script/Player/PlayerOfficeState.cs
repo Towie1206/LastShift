@@ -10,6 +10,8 @@ public class PlayerOfficeState : PlayerState
     }
 
     private OfficeViewManager officeViewManager;
+
+    private IHoldInteractable currentHolding;
     private bool wasInLeftEdge = false;
     private bool wasInRightEdge = false;
     private float edgePercent = .08f; // 8% mép màn hình mỗi bên (khoảng 150px)
@@ -29,17 +31,20 @@ public class PlayerOfficeState : PlayerState
         HandleEdgeHover();
 
         // Khi bấm chuột trái
-        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            // Đang bấm vào UI thì không tương tác 3D
-            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
 
-            player.interactor.TryToInteractFromCursor(Mouse.current.position.ReadValue());
-        }
-        if (Keyboard.current != null)
+        if (Mouse.current != null)
         {
-            if (Keyboard.current.aKey.wasPressedThisFrame) officeViewManager.TurnLeft();
-            if (Keyboard.current.dKey.wasPressedThisFrame) officeViewManager.TurnRight();
+            // 1. KHI VỪA ẤN CHUỘT XUỐNG:
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+                player.interactor.TryStartInteract(Mouse.current.position.ReadValue());
+            }
+            // 2. KHI VỪA NHẢ CHUỘT RA:
+            if (Mouse.current.leftButton.wasReleasedThisFrame)
+            {
+                player.interactor.StopInteract();
+            }
         }
     }
 

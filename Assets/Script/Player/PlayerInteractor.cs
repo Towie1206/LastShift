@@ -13,7 +13,36 @@ public class PlayerInteractor : MonoBehaviour
         player = GetComponent<Player>();
     }
 
+    // 👈 Biến nhớ: Ngón tay đang đè lên cái gì?
+    private IHoldInteractable currentHolding;
+    // Khi ngón tay ẤN XUỐNG:
+    public void TryStartInteract(Vector2 mouseScreenPos)
+    {
+        Ray ray = playerCamera.ScreenPointToRay(mouseScreenPos);
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactDistanceClick, interactableLayer))
+        {
+            // Trường hợp 1: Nếu là đồ vật ấn giữ (Nút Đèn)
+            IHoldInteractable holdable = hitInfo.collider.GetComponentInParent<IHoldInteractable>();
+            if (holdable != null)
+            {
+                currentHolding = holdable; // Ghi nhớ lại
+                currentHolding.OnPointerDown(player); // Bảo nút đèn: "Bật lên!"
+                return;
+            }
+            // Trường hợp 2: Nếu là đồ vật bấm 1 phát ăn ngay (Cửa, Bức thư, CCTV)
+            IInteractable interactable = hitInfo.collider.GetComponentInParent<IInteractable>();
+            interactable?.Interact(player); // Vẫn chạy như bình thường!
+        }
+    }
 
+    public void StopInteract()
+    {
+        if (currentHolding != null)
+        {
+            currentHolding.OnPointerUp(player); // Bảo nút đèn: "Tắt đi!"
+            currentHolding = null; // Quên đi, hết đè rồi
+        }
+    }
     public void TryToInteract()
     {
         // tạo tia chiếu từ vị trí của camera người chơi theo hướng nhìn của camera
@@ -26,16 +55,7 @@ public class PlayerInteractor : MonoBehaviour
             interactable?.Interact(player);
         }
     }    
-
-    public void TryToInteractFromCursor(Vector2 mouseScreenPos)
-    {
-        Ray ray = playerCamera.ScreenPointToRay(mouseScreenPos);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactDistanceClick, interactableLayer))
-        {
-            IInteractable interactable = hitInfo.collider.GetComponentInParent<IInteractable>();
-            interactable?.Interact(player);
-        }
-    }    
+  
     private void OnDrawGizmos()
     {
         if(playerCamera == null)

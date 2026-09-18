@@ -139,4 +139,10 @@ public class Player : MonoBehaviour
         computerState.SetStation(station);
         stateMachine.ChangeState(computerState); // Não tự chuyển state!
     }
+
+    public void ForceOfficeView()
+    {
+        stateMachine.ChangeState(officeState); // Tự về lại ghế văn phòng
+        input.Disable();                      // Khóa phím và chuột hoàn toàn
+    }
 }
