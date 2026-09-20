@@ -19,6 +19,9 @@ public class PlayerOfficeState : PlayerState
     {
         base.Enter();
         player.movement.Stop();
+
+        player.look.ResetLook(0f);
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
       

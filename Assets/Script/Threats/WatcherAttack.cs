@@ -93,4 +93,9 @@ public class WatcherAttack : MonoBehaviour
 
     [ContextMenu("💥 TEST JUMPSCARE CỬA TRÁI 💥")]
     public void TestLeft() => PerformJumpscare(OfficeViewManager.OfficeView.Left);
+
+    [ContextMenu("💥 TEST JUMPSCARE CỬA PHẢI 💥")]
+    public void TestRight() => PerformJumpscare(OfficeViewManager.OfficeView.Right);
+    [ContextMenu("💥 TEST JUMPSCARE BAN TRÊN 💥")]
+    public void TesrMaintance() => PerformJumpscare(OfficeViewManager.OfficeView.Back);
 }

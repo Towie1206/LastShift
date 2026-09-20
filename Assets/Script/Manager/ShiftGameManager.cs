@@ -14,6 +14,8 @@ public class ShiftGameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject winUI; //rawimage
     [SerializeField] private GameObject gameOverUI; //rawimage
+    [SerializeField] private GameObject staticNoise; //rawimage
+
     
 
     public static bool startDirectlyInOffice = false;
@@ -23,14 +25,16 @@ public class ShiftGameManager : MonoBehaviour
     [SerializeField] private MaintenanceSystem maintenanceSystem;
     [SerializeField] private WinScreenController winScreen;
 
+    [SerializeField] private PowerOutageController powerOutageController;
+
     private void OnEnable()
     {
         shiftClock.shiftCompleted += HandleWin;
         watcherAttack.PlayerCaught += HandleGameOver;
 
-        // Thêm dòng này: Hết oxy ngạt thở -> Game Over!
-        if (maintenanceSystem != null)
-            maintenanceSystem.VentilationExpired += HandleGameOver;
+        // THÊM DÒNG NÀY: Nghe tin mất điện bị cắn -> Chạy GameOver luôn!
+        if (powerOutageController != null)
+            powerOutageController.OnBlackoutKill += HandleGameOver;
     }
 
     private void OnDisable()
@@ -38,11 +42,9 @@ public class ShiftGameManager : MonoBehaviour
         shiftClock.shiftCompleted -= HandleWin;
         watcherAttack.PlayerCaught -= HandleGameOver;
 
-        if (maintenanceSystem != null)
-            maintenanceSystem.VentilationExpired -= HandleGameOver;
+        if (powerOutageController != null)
+            powerOutageController.OnBlackoutKill -= HandleGameOver;
     }
-
-
 
     private void Start()
     {
@@ -74,7 +76,13 @@ public class ShiftGameManager : MonoBehaviour
 
     private IEnumerator waitJumpScared()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.75f); // đợi jump
+
+        staticNoise.SetActive(true);
+
+        yield return new WaitForSeconds(1.75f); // staticnoise
+
+        staticNoise.SetActive(false);
 
         gameOverUI.SetActive(true);
         Time.timeScale = 0f; // Tạm dừng trò chơi

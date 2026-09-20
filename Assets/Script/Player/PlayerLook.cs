@@ -29,4 +29,13 @@ public class PlayerLook : MonoBehaviour
 
         cameraPivot.localRotation = Quaternion.Euler(pitch, 0f, 0f);
     }
+
+    public void ResetLook(float targetPitch = 0f)
+    {
+        pitch = targetPitch;
+        if (cameraPivot != null)
+        {
+            cameraPivot.localRotation = Quaternion.Euler(pitch, 0f, 0f);
+        }
+    }
 }

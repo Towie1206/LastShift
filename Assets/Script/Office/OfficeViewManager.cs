@@ -93,4 +93,32 @@ public class OfficeViewManager : MonoBehaviour
         }
         isRotating = false;
     }
+
+    public void SetView(OfficeView view, bool instant = false)
+    {
+        currentView = view;
+        switch (view)
+        {
+            case OfficeView.Front:
+                targetView = frontView;
+                break;
+            case OfficeView.Back:
+                targetView = backView;
+                break;
+            case OfficeView.Left:
+                targetView = leftView;
+                break;
+            case OfficeView.Right:
+                targetView = rightView;
+                break;
+        }
+
+        if (instant && targetView != null)
+        {
+            transform.rotation = targetView.rotation;
+            isRotating = false;
+        }
+        else
+            isRotating = true;
+    }
 }

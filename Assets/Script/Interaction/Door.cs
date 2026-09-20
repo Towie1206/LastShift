@@ -37,4 +37,6 @@ public class Door : MonoBehaviour
         return distanceToClosedPosition <= 0.01f;
     }
 
+    public void ForceOpen() => isOpen = true;
+
 }
