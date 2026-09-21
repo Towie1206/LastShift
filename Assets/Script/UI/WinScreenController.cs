@@ -59,6 +59,8 @@ public class WinScreenController : MonoBehaviour
         if (bellAudio != null) bellAudio.Play();
 
         yield return new WaitForSecondsRealtime(4f);
+        Time.timeScale = 1f; // Nhớ mở lại timeScale
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
 
     }
 }
