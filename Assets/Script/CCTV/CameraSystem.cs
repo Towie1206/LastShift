@@ -9,6 +9,7 @@ public class CameraSystem : MonoBehaviour
     [SerializeField] private GameObject offlineCamUI;
     [Header("Audio")]
     [SerializeField] private AudioSource switchCamAudio;
+    [SerializeField] private AudioSource musicBoxAudio;
 
     [Header("Hiệu ứng chuyển Cam")]
     [SerializeField] private GameObject transitionStaticUI;
@@ -47,10 +48,16 @@ public class CameraSystem : MonoBehaviour
             if (camIndex == 7)
             {
                 offlineCamUI.SetActive(true);
+
+                if (musicBoxAudio != null && !musicBoxAudio.isPlaying)
+                    musicBoxAudio.Play();
             }
             else
             {
                 offlineCamUI.SetActive(false);
+
+                if (musicBoxAudio != null && musicBoxAudio.isPlaying)
+                    musicBoxAudio.Stop();
             }
             cameras[i].gameObject.SetActive(i == camIndex);
         }
@@ -66,8 +73,8 @@ public class CameraSystem : MonoBehaviour
     }
     private IEnumerator FlashStaticRoutine()
     {
-        transitionStaticUI.SetActive(true);    
-        yield return new WaitForSeconds(0.1f); 
-        transitionStaticUI.SetActive(false);   
+        transitionStaticUI.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        transitionStaticUI.SetActive(false);
     }
 }

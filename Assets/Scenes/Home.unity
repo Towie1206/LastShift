@@ -1642,6 +1642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec36282797199442b7d9c19d70e8e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuActions
+  storySceneName: Home
   gameSceneName: Game
 --- !u!1 &271749811
 GameObject:
@@ -1936,7 +1937,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PictureFrame
   data: {fileID: 11400000, guid: fce9017e04fb96d418d006d831586074, type: 2}
   controller: {fileID: 1563605766}
-  player: {fileID: 338525488}
 --- !u!1001 &281520697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6637,6 +6637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
   playerCamera: {fileID: 30991718}
   interactDistance: 3
+  interactDistanceClick: 5
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -6708,7 +6709,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f906aedc7c259914cae5f38166be82f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  cctvViewReference: {fileID: 0}
   holdPointReference: {fileID: 1167836417}
   dialogueControllerReference: {fileID: 1563605766}
 --- !u!4 &338525489
@@ -10744,7 +10744,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 667b9c92e005ac34ea4e6040049b4e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhoneStation
-  player: {fileID: 338525488}
   dialogueController: {fileID: 1563605766}
   data: {fileID: 11400000, guid: 10713b37294d98f4d9c9aa258c400dbc, type: 2}
   holdPoint: {fileID: 1504673150}
@@ -11612,7 +11611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef4cf0d6abf729b48a2f8d697b2271f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomeIntroSequence
-  player: {fileID: 338525488}
   dialogueController: {fileID: 1563605766}
   data: {fileID: 11400000, guid: 316aa965ca707e6409b159ca9036c264, type: 2}
   curtainTransition: {fileID: 188590799}
@@ -12373,7 +12371,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 266956865}
         m_TargetAssemblyTypeName: MainMenuActions, Assembly-CSharp
-        m_MethodName: StartShift
+        m_MethodName: ContinueToWork
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22062,7 +22060,6 @@ MonoBehaviour:
   phoneStation: {fileID: 944180827}
   dialogueController: {fileID: 1563605766}
   data: {fileID: 11400000, guid: 744d087cf70f6d746981d09d8c71688d, type: 2}
-  player: {fileID: 338525488}
 --- !u!65 &2058946339
 BoxCollider:
   m_ObjectHideFlags: 0

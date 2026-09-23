@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d86f383268a8ce4e85b08da522808a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuHoverArrow
-  arrow: {fileID: 0}
+  arrow: {fileID: 1285301044}
 --- !u!114 &36390143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6426,7 +6426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d86f383268a8ce4e85b08da522808a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuHoverArrow
-  arrow: {fileID: 0}
+  arrow: {fileID: 1285301044}
 --- !u!114 &1687378229
 MonoBehaviour:
   m_ObjectHideFlags: 0

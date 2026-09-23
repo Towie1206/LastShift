@@ -10,6 +10,7 @@ public class CCTVStation : MonoBehaviour, IInteractable
     [SerializeField] private int monitorPriority = 20;
     [SerializeField] private CCTVView cctvView;
 
+
     public void Interact(Player player)
     {
         player.EnterCCTV(this);
@@ -25,9 +26,10 @@ public class CCTVStation : MonoBehaviour, IInteractable
 
         cctvView.Show();
     }
+
     public void CloseCCTV()
     {
         if (cctvView != null) cctvView.Hide();
-        if (cinemachineCamera != null) cinemachineCamera.Priority = 0; 
+        if (cinemachineCamera != null) cinemachineCamera.Priority = 0;
     }
 }

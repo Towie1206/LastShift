@@ -1,16 +1,26 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GeneratorSystem : MonoBehaviour
 {
     [Header("Electricity")]
     [SerializeField] private float maxPower = 100f; 
-    [SerializeField] private float drainRate = 3f;
+    [SerializeField] private float drainRate = 2f;
     [SerializeField] private float rechargeRate = 10f;
+    private int lastUsageLevel = -1;
+    private IPowerConsumer[] consumers;
+
+    public void SetupConsumers(IPowerConsumer[] consumers)
+    {
+        this.consumers = consumers;
+    }
 
     public event Action<float> OnPowerChanged;
 
     public event Action OnPowerOutage;
+
+    public event Action<int> OnUsageLevelChanged;
 
     private float currentPower;
     private bool isGeneratorActive = false;
@@ -29,18 +39,33 @@ public class GeneratorSystem : MonoBehaviour
         if(!isGeneratorActive) return;
 
         if(isRecharging)
-            currentPower += rechargeRate * Time.deltaTime;   
+            currentPower += rechargeRate * Time.deltaTime;
         else
-            currentPower -= drainRate * Time.deltaTime;
-
-        currentPower = Mathf.Clamp(currentPower, 0, maxPower);
-
-        OnPowerChanged?.Invoke(currentPower / maxPower);
-
-        if (currentPower <= 0)
         {
-            TriggerPowerOutage();
+            int activeCount = 0;
+            float totalDrain = drainRate;
+            if (consumers != null)
+            {
+                for (int i = 0; i < consumers.Length; i++)
+                {
+                    if (consumers[i] != null && consumers[i].IsConsumingPower)
+                    {
+                        activeCount++;
+                        totalDrain += consumers[i].PowerDrainRate;
+                    }    
+                }
+            }
+            int currentUsageLevel = 1 + activeCount;
+            if (currentUsageLevel != lastUsageLevel)
+            {
+                lastUsageLevel = currentUsageLevel;
+                OnUsageLevelChanged?.Invoke(currentUsageLevel);
+            }
+            currentPower -= totalDrain * Time.deltaTime;
         }
+        currentPower = Mathf.Clamp(currentPower, 0, maxPower);
+        OnPowerChanged?.Invoke(currentPower / maxPower);
+        if (currentPower <= 0) TriggerPowerOutage();
     }
 
     public void SetReCharging(bool state)

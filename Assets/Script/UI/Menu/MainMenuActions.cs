@@ -25,6 +25,15 @@ public class MainMenuActions : MonoBehaviour
     }
 
     /// <summary>
+    /// Tiếp tục sau đoạn chat ở nhà: Đến xưởng để nói chuyện với Quản lý
+    /// </summary>
+    public void ContinueToWork()
+    {
+        ShiftGameManager.startDirectlyInOffice = false;
+        SceneManager.LoadScene(gameSceneName);
+    }
+
+    /// <summary>
     /// Tương thích ngược với nút Start cũ
     /// </summary>
     public void StartShift()

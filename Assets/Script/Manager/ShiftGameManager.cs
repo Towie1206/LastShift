@@ -15,8 +15,11 @@ public class ShiftGameManager : MonoBehaviour
     [SerializeField] private GameObject winUI; //rawimage
     [SerializeField] private GameObject gameOverUI; //rawimage
     [SerializeField] private GameObject staticNoise; //rawimage
+    [SerializeField] private GameObject usagePanel;
 
-    
+    [Header("Start Shift Sequence")]
+    [SerializeField] private QuanLyInteract quanLy;             // Lắng nghe Quản lý
+    [SerializeField] private PhoneCallController phoneCallController; // Bật cuộc gọi & tiếng quạt
 
     public static bool startDirectlyInOffice = false;
 
@@ -27,6 +30,12 @@ public class ShiftGameManager : MonoBehaviour
 
     [SerializeField] private PowerOutageController powerOutageController;
 
+    [Header("Office Electrical Devices")]
+    [SerializeField] private Door leftDoor;
+    [SerializeField] private Door rightDoor;
+    [SerializeField] private LightControl leftLight;
+    [SerializeField] private LightControl rightLight;
+
     private void OnEnable()
     {
         shiftClock.shiftCompleted += HandleWin;
@@ -35,6 +44,9 @@ public class ShiftGameManager : MonoBehaviour
         // THÊM DÒNG NÀY: Nghe tin mất điện bị cắn -> Chạy GameOver luôn!
         if (powerOutageController != null)
             powerOutageController.OnBlackoutKill += HandleGameOver;
+
+        if (quanLy != null)
+            quanLy.OnDialogueCompleted += StartOfficeShift;
     }
 
     private void OnDisable()
@@ -44,15 +56,43 @@ public class ShiftGameManager : MonoBehaviour
 
         if (powerOutageController != null)
             powerOutageController.OnBlackoutKill -= HandleGameOver;
+
+        if (quanLy != null)
+            quanLy.OnDialogueCompleted -= StartOfficeShift;
     }
 
     private void Start()
     {
-        // Nếu lần chơi trước vừa bấm Restart -> Nhảy cóc thẳng vào ghế bảo vệ!
+        // Nếu chơi lại (Restart) -> Tự động vào thẳng ghế và bật ca trực luôn
         if (startDirectlyInOffice)
         {
-            SkipToOffice();
+            StartOfficeShift();
         }
+        else
+        {
+            // THÊM DÒNG NÀY: Tắt đồng hồ khi người chơi còn ở ngoài sảnh!
+            if (shiftClock != null)
+                shiftClock.enabled = false;
+
+            if (usagePanel != null)
+                usagePanel.SetActive(false);
+        }
+
+        generatorSystem.SetupConsumers(new IPowerConsumer[] { leftDoor, rightDoor, leftLight, rightLight } );
+    }
+
+    public void StartOfficeShift()
+    {
+        // 1. Dịch chuyển vào ghế, bật đồng hồ, máy phát, anomaly...
+        SkipToOffice();
+
+        // Bật bảng Usage khi vào phòng trực
+        if (usagePanel != null)
+            usagePanel.SetActive(true);
+
+        // 2. Kích hoạt tiếng quạt phòng và cuộc gọi Phone Guy
+        if (phoneCallController != null)
+            phoneCallController.StartNightSequence();
     }
     private void HandleWin()
     {
@@ -61,6 +101,13 @@ public class ShiftGameManager : MonoBehaviour
         winScreen.StartWinSequence();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        if (usagePanel != null)
+            usagePanel.SetActive(false);
+        if (phoneCallController != null)
+        {
+            phoneCallController.EndCall(false);
+            phoneCallController.StopAmbience();
+        }
     }
 
     private void HandleGameOver()
@@ -70,6 +117,15 @@ public class ShiftGameManager : MonoBehaviour
         var currentView = officeViewManager.CurrentView();
 
         watcherAttack.PerformJumpscare(currentView);
+
+        if (usagePanel != null)
+            usagePanel.SetActive(false);
+
+        if (phoneCallController != null)
+        {
+            phoneCallController.EndCall(false);
+            phoneCallController.StopAmbience();
+        }
 
         StartCoroutine(waitJumpScared());
     }

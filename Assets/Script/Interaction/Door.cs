@@ -1,16 +1,23 @@
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Door : MonoBehaviour, IPowerConsumer
 {
     [SerializeField] private Vector3 openPos;
     [SerializeField] private Vector3 closePos;
     [SerializeField] private float speed;
+    [SerializeField] private float doorDrainRate = 1f;
     private bool isOpen = true;
+
+    public bool IsConsumingPower => !isOpen;
+
+    public float PowerDrainRate => doorDrainRate;
+
     public bool DoorCheck() => isOpen;
 
     private void Start()
     {
         transform.localPosition = isOpen ? openPos : closePos;
+
     }
 
     private void Update()

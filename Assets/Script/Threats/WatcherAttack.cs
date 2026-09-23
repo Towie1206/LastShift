@@ -6,6 +6,9 @@ public class WatcherAttack : MonoBehaviour
 {
     [SerializeField] private Door rightDoor;
     [SerializeField] private float standDuration = 5f;
+    [SerializeField] private LightControl rightLightControl; // Lắng nghe nút đèn cửa phải
+    [SerializeField] private AudioSource windowScareAudio; // Tiếng FNAF 1 hú khi bị rọi đèn
+
 
     [SerializeField] private Animator anim;
     [SerializeField] private Transform freedyTransform;
@@ -21,6 +24,14 @@ public class WatcherAttack : MonoBehaviour
     public event Action Blocked;
     public event Action PlayerCaught;
 
+    private void OnEnable()
+    {
+        rightLightControl.OnLightStateChanged += HandleLightChanged;
+    }
+    private void OnDisable()
+    {
+        rightLightControl.OnLightStateChanged -= HandleLightChanged;
+    }
     private void Update()
     {
         if (!isAttacking)
@@ -88,6 +99,24 @@ public class WatcherAttack : MonoBehaviour
         if (jumpscareSound != null) jumpscareSound.Play();
 
     }
+
+    private void HandleLightChanged(bool isLightOn)
+    {
+        // Đèn BẬT VÀ quái đang đứng rình ở cửa -> HÚ TIẾNG FNAF 1
+        if (isLightOn && isAttacking)
+        {
+            if (windowScareAudio != null) windowScareAudio.Play();
+        }
+        else
+        {
+            // Đèn TẮT -> Dừng tiếng hú
+            if (windowScareAudio != null && windowScareAudio.isPlaying)
+            {
+                windowScareAudio.Stop();
+            }
+        }
+    }
+
     [ContextMenu("💥 TEST JUMPSCARE BAN DƯỚI 💥")]
     public void TestDesk() => PerformJumpscare(OfficeViewManager.OfficeView.Front);
 

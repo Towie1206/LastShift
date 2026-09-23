@@ -34,8 +34,14 @@ public class PowerOutageController : MonoBehaviour
         lightPowerOutage.SetActive(true);
         for (int i = 0; i < light.Length; i++)
             light[i].SetActive(false);
-        for (int i = 0; i < door.Length; i++)
-            door[i].ForceOpen();
+        if (door != null)
+        {
+            for (int i = 0; i < door.Length; i++)
+            {
+                if (door[i] != null)
+                    door[i].ForceOpen();
+            }
+        }
 
         player.ForceOfficeView();
         officeViewManager.SetView(OfficeView.Right, instant: true);

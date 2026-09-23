@@ -1,23 +1,25 @@
 using System;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.ProBuilder.Shapes;
 
-public class LightControl : MonoBehaviour, IHoldInteractable
+public class LightControl : MonoBehaviour, IHoldInteractable, IPowerConsumer
 {
     [SerializeField] private ToggleLight light;
-    [SerializeField] private float maxHoldDuration = 3f;
     [SerializeField] private Material defautMat;
     [SerializeField] private Material holdMat;
     [SerializeField] private GameObject offLight;
     [SerializeField] private GameObject onLight;
 
+    [SerializeField] private AudioSource lightBuzzAudio;
+
+    public event Action<bool> OnLightStateChanged;
 
     private MeshRenderer meshRenderer;
 
-    private Coroutine autoTurnOffCo;
     private bool isHolding;
 
+    public bool IsConsumingPower => isHolding;
+
+    public float PowerDrainRate => 1f;
 
     private void Awake()
     {
@@ -36,8 +38,9 @@ public class LightControl : MonoBehaviour, IHoldInteractable
 
         meshRenderer.material = holdMat;
 
-        if (autoTurnOffCo != null) StopCoroutine(autoTurnOffCo);
-        autoTurnOffCo = StartCoroutine(AutoTurnOffRoutine());
+        if (lightBuzzAudio != null) lightBuzzAudio.Play();
+
+        OnLightStateChanged?.Invoke(true);
     }
 
     public void OnPointerUp(Player player)
@@ -45,20 +48,12 @@ public class LightControl : MonoBehaviour, IHoldInteractable
         if (!isHolding) return;
         isHolding = false;
 
-        if (autoTurnOffCo != null) StopCoroutine(autoTurnOffCo);
-
         light.LightControl();
+
         meshRenderer.material = defautMat;
-    }
-    private IEnumerator AutoTurnOffRoutine()
-    {
-        yield return new WaitForSeconds(maxHoldDuration);
-        light.LightControl(); // Hết giờ tự ngắt
-        isHolding = false;
-    }
-    private void LightButton()
-    {
-        if (offLight != null) offLight.SetActive(light.LightCheck());
-        if (onLight != null) onLight.SetActive(!light.LightCheck());
+
+        if (lightBuzzAudio != null) lightBuzzAudio.Stop();
+
+        OnLightStateChanged?.Invoke(false);
     }
 }
