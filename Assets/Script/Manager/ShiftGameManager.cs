@@ -45,6 +45,9 @@ public class ShiftGameManager : MonoBehaviour
         if (powerOutageController != null)
             powerOutageController.OnBlackoutKill += HandleGameOver;
 
+        if (maintenanceSystem != null)
+            maintenanceSystem.VentilationExpired += HandleSuffocationGameOver;
+
         if (quanLy != null)
             quanLy.OnDialogueCompleted += StartOfficeShift;
     }
@@ -56,6 +59,9 @@ public class ShiftGameManager : MonoBehaviour
 
         if (powerOutageController != null)
             powerOutageController.OnBlackoutKill -= HandleGameOver;
+
+        if (maintenanceSystem != null)
+            maintenanceSystem.VentilationExpired -= HandleSuffocationGameOver;
 
         if (quanLy != null)
             quanLy.OnDialogueCompleted -= StartOfficeShift;
@@ -177,5 +183,49 @@ public class ShiftGameManager : MonoBehaviour
         anomalyManager.StartShift();
         generatorSystem.StartGeneratorAfterDelay(45f);
     }
+    private void HandleSuffocationGameOver()
+    {
+        // 1. Cưỡng chế kéo góc nhìn về lại bàn trực văn phòng
+        // (Nếu đang soi camera hay dùng máy tính sửa chữa thì bị văng ra)
+        player.ForceOfficeView();
+
+        // 2. Tắt các bảng UI không cần thiết
+        if (usagePanel != null)
+            usagePanel.SetActive(false);
+
+        // 3. Tắt âm thanh phòng (tiếng quạt ngắt vì hệ thống thông gió đã chết hẳn)
+        if (phoneCallController != null)
+        {
+            phoneCallController.EndCall(false);
+            phoneCallController.StopAmbience();
+        }
+
+        // 4. Bắt đầu chuỗi ngạt thở: Tối sầm -> Nhiễu TV -> Game Over
+        StartCoroutine(SuffocationGameOverSequence());
+    }
+
+    private IEnumerator SuffocationGameOverSequence()
+    {
+        // Cho người chơi ngạt thở trong bóng tối 2 giây
+        yield return new WaitForSeconds(2.0f);
+
+        // Màn hình nhiễu TV rẹt rẹt
+        if (staticNoise != null)
+            staticNoise.SetActive(true);
+
+        yield return new WaitForSeconds(1.5f);
+
+        if (staticNoise != null)
+            staticNoise.SetActive(false);
+
+        // Hiện bảng Game Over
+        if (gameOverUI != null)
+            gameOverUI.SetActive(true);
+
+        Time.timeScale = 0f; // Dừng game
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
 
 }

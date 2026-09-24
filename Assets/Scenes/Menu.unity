@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuHoverArrow
   arrow: {fileID: 1285301044}
+  arrowStartPosition: {x: 0, y: 0}
 --- !u!114 &36390143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1407,7 +1408,7 @@ GameObject:
   - component: {fileID: 352433635}
   - component: {fileID: 352433634}
   - component: {fileID: 352433633}
-  - component: {fileID: 352433636}
+  - component: {fileID: 352433637}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -1529,7 +1530,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352433631}
   m_CullTransparentMesh: 1
---- !u!114 &352433636
+--- !u!114 &352433637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1538,10 +1539,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 352433631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d86f383268a8ce4e85b08da522808a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 854bfed48d7949148b81a0901e727652, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MenuHoverArrow
-  arrow: {fileID: 1285301044}
+  m_EditorClassIdentifier: Assembly-CSharp::MenuHoverEffect
+  arrowText: {fileID: 1285301044}
 --- !u!1 &359431081
 GameObject:
   m_ObjectHideFlags: 0
@@ -3598,10 +3599,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 969649429}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d86f383268a8ce4e85b08da522808a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 854bfed48d7949148b81a0901e727652, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MenuHoverArrow
-  arrow: {fileID: 1285301044}
+  m_EditorClassIdentifier: Assembly-CSharp::MenuHoverEffect
+  arrowText: {fileID: 1285301044}
 --- !u!1 &972969761
 GameObject:
   m_ObjectHideFlags: 0
@@ -4019,10 +4020,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1008423957}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d86f383268a8ce4e85b08da522808a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 854bfed48d7949148b81a0901e727652, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MenuHoverArrow
-  arrow: {fileID: 1285301044}
+  m_EditorClassIdentifier: Assembly-CSharp::MenuHoverEffect
+  arrowText: {fileID: 1285301044}
 --- !u!1 &1024364921
 GameObject:
   m_ObjectHideFlags: 0
@@ -4995,7 +4996,7 @@ GameObject:
   - component: {fileID: 1362762483}
   - component: {fileID: 1362762482}
   - component: {fileID: 1362762481}
-  - component: {fileID: 1362762480}
+  - component: {fileID: 1362762484}
   m_Layer: 5
   m_Name: AnomalyList
   m_TagString: Untagged
@@ -5023,19 +5024,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -35}
   m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1362762480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362762478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d86f383268a8ce4e85b08da522808a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MenuHoverArrow
-  arrow: {fileID: 1285301044}
 --- !u!114 &1362762481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5130,6 +5118,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1362762478}
   m_CullTransparentMesh: 1
+--- !u!114 &1362762484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362762478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 854bfed48d7949148b81a0901e727652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuHoverEffect
+  arrowText: {fileID: 1285301044}
 --- !u!1 &1458244455
 GameObject:
   m_ObjectHideFlags: 0
@@ -6060,7 +6061,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: v0.0.1
+  m_text: v0.0.2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b4531943397ed2b49ada0ee77e0711c6, type: 2}
   m_sharedMaterial: {fileID: 490616369727867659, guid: b4531943397ed2b49ada0ee77e0711c6, type: 2}
@@ -6427,6 +6428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuHoverArrow
   arrow: {fileID: 1285301044}
+  arrowStartPosition: {x: 0, y: 0}
 --- !u!114 &1687378229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8188,10 +8190,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2110348686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d86f383268a8ce4e85b08da522808a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 854bfed48d7949148b81a0901e727652, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MenuHoverArrow
-  arrow: {fileID: 1285301044}
+  m_EditorClassIdentifier: Assembly-CSharp::MenuHoverEffect
+  arrowText: {fileID: 1285301044}
 --- !u!1 &2122996038
 GameObject:
   m_ObjectHideFlags: 0
@@ -8204,7 +8206,7 @@ GameObject:
   - component: {fileID: 2122996043}
   - component: {fileID: 2122996042}
   - component: {fileID: 2122996041}
-  - component: {fileID: 2122996040}
+  - component: {fileID: 2122996044}
   m_Layer: 5
   m_Name: ControlButton
   m_TagString: Untagged
@@ -8232,19 +8234,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2122996040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2122996038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d86f383268a8ce4e85b08da522808a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MenuHoverArrow
-  arrow: {fileID: 1285301044}
 --- !u!114 &2122996041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8339,6 +8328,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122996038}
   m_CullTransparentMesh: 1
+--- !u!114 &2122996044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122996038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 854bfed48d7949148b81a0901e727652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuHoverEffect
+  arrowText: {fileID: 1285301044}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

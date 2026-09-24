@@ -1,7 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.Collections;
+using UnityEngine.UI;
 
 public class VentilationBreakdownEffect : MonoBehaviour
 {
@@ -11,7 +11,7 @@ public class VentilationBreakdownEffect : MonoBehaviour
     [SerializeField] private TMP_Text timerText;
 
 
-    [SerializeField] private GameObject blackoutPanel;
+    [SerializeField] private Image blackoutPanel;
 
     private bool isCountingDown;
     private bool isGameOver;
@@ -32,6 +32,12 @@ public class VentilationBreakdownEffect : MonoBehaviour
     {
         if (timerText != null)
             timerText.gameObject.SetActive(false);
+
+        blackoutPanel.gameObject.SetActive(true);
+        Color c = blackoutPanel.color;
+        c.a = 0;
+        blackoutPanel.color = c;
+        blackoutPanel.raycastTarget = false;
     }
 
     private void Update()
@@ -65,12 +71,13 @@ public class VentilationBreakdownEffect : MonoBehaviour
         if (isOnline)
         {
             isCountingDown = false;
-
             StopAllCoroutines();
-            if (blackoutPanel != null) blackoutPanel.SetActive(false);
 
             if (timerText != null)
                 timerText.gameObject.SetActive(false);
+
+            // Mở mắt tỉnh táo lại hoàn toàn
+            StartCoroutine(FadeAlpha(0f, 0.4f));
         }
         else
         {
@@ -89,35 +96,86 @@ public class VentilationBreakdownEffect : MonoBehaviour
         isCountingDown = false;
         isGameOver = true;
 
+        StopAllCoroutines();
+
         if (timerText != null)
             timerText.gameObject.SetActive(false);
 
-        // Khóa player
-        if (maintenanceSystem.TryGetComponent<MaintenanceStation>(out var station))
-        {
-            // Station sẽ tự xử lý
-        }
-
+        // Ngất lịm hoàn toàn: Màn hình tối sầm dần trong 0.8s
+        StartCoroutine(FadeAlpha(1f, 0.8f));
     }
 
+    private IEnumerator FadeAlpha(float targetAlpha, float duration)
+    {
+        Color c = blackoutPanel.color;
+        float stratAlpha = c.a;
+        float elapsed = 0;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            c.a = Mathf.Lerp(stratAlpha, targetAlpha, elapsed / duration);
+            blackoutPanel.color = c;
+            yield return null;
+        }
+
+        c.a = targetAlpha;
+
+        // Chỉ chặn click chuột khi mắt đã nhắm nghiền (> 0.8)
+        blackoutPanel.raycastTarget = (targetAlpha > 0.8f);
+    }
 
     private IEnumerator SuffocationBlinkRoutine()
     {
         while (isCountingDown)
         {
-            // Cứ sau 3 đến 5 giây thì bị "nhắm mắt" 1 lần
-            yield return new WaitForSeconds(Random.Range(3f, 5f));
+            float timeLeft = maintenanceSystem.GetVentilationTimeLeft();
 
-            if (!isCountingDown) break;
+            float interval;       // Khoảng cách giữa 2 lần chớp
+            float closeDuration;  // Tốc độ mí mắt sụp xuống
+            float holdDuration;   // Thời gian mắt nhắm nghiền
+            float openDuration;   // Tốc độ hé mắt mở ra
 
-            // 1. Màn hình tối đen (nhắm mắt)
-            if (blackoutPanel != null) blackoutPanel.SetActive(true);
 
-            // 2. Tối trong khoảng 0.8 đến 1.2 giây
-            yield return new WaitForSeconds(1f);
+            if (timeLeft > 30f)
+            {
+                // Giai đoạn 1 (> 30s): Chớp mắt nhẹ nhàng
+                interval = Random.Range(4f, 6f);
+                closeDuration = 0.2f;
+                holdDuration = 0.25f;
+                openDuration = 0.3f;
+            }
+            else if (timeLeft > 15f)
+            {
+                // Giai đoạn 2 (15s - 30s): Thiếu oxy, mắt nặng trĩu
+                interval = Random.Range(2f, 3.5f);
+                closeDuration = 0.35f;
+                holdDuration = 0.6f;
+                openDuration = 0.4f;
+            }
+            else
+            {
+                // Giai đoạn 3 (< 15s): Nguy kịch! Mắt lịm dần, tối sầm lâu
+                interval = Random.Range(0.8f, 1.4f);
+                closeDuration = 0.5f;  // Từ từ sụp xuống
+                holdDuration = 1.0f;   // Tối đen rất lâu
+                openDuration = 0.6f;   // Mở mắt một cách mệt mỏi
+            }
 
-            // 3. Mở mắt ra lại
-            if (blackoutPanel != null) blackoutPanel.SetActive(false);
+            yield return new WaitForSeconds(interval);
+
+            if (!isCountingDown || isGameOver) break;
+
+            // 1. NHẮM MẮT (Fade Alpha 0 -> 1)
+            yield return FadeAlpha(1f, closeDuration);
+
+            // 2. GIỮ MẮT NHẮM
+            yield return new WaitForSeconds(holdDuration);
+
+            if (!isCountingDown || isGameOver) break;
+
+            // 3. HÉ MẮT RA LẠI (Fade Alpha 1 -> 0)
+            yield return FadeAlpha(0f, openDuration);
         }
     }
 }
