@@ -9,7 +9,7 @@
 
 **A 3D first-person psychological survival horror game. Survive the night, keep the power running, and monitor the cameras before your shift ends you.**
 
-[🎮 Play on Itch.io](https://itch.io/your-game-link-here) • [📺 Watch Devlog (YouTube)](https://youtube.com/your-devlog-link-here) • [🎨 Figma UI Design](https://www.figma.com/design/giXJAL6gsB4NRTOpyzeHKq/Last-Shift---UI-UX-Design-System)
+[🎮 Play on Itch.io](https://towie1206.itch.io/lastshift) • [📺 Watch Devlog (YouTube)](https://youtube.com/your-devlog-link-here) 
 
 </div>
 
@@ -60,8 +60,8 @@ The electrical grid is on the verge of collapsing, anomalous entities are roamin
 ## 🚀 How to Play
 
 ### 📥 Play the Builds
-- **Windows PC:** Download the latest build from [Itch.io](https://itch.io/your-game-link-here), unzip the archive, and run `LastShift.exe`.
-- **Android Mobile:** Download `LastShift_v0.0.2.apk` from [Itch.io](https://itch.io/your-game-link-here), install it on your device, and play!
+- **Windows PC:** Download the latest build from [Itch.io](https://towie1206.itch.io/lastshift), unzip the archive, and run `LastShift.exe`.
+- **Android Mobile:** Download `LastShift_v0.0.2.apk` from [Itch.io](https://towie1206.itch.io/lastshift), install it on your device, and play!
 
 ### 💻 Open in Unity Editor
 1. Clone this repository:
@@ -78,7 +78,7 @@ The electrical grid is on the verge of collapsing, anomalous entities are roamin
 ## 📺 Devlog & Updates
 
 - 🎬 Watch our devlog journey and gameplay showcases on **[YouTube](https://youtube.com/your-devlog-link-here)**.
-- 💬 Share your feedback, report bugs, and rate the game on our **[Itch.io Page](https://itch.io/your-game-link-here)**!
+- 💬 Share your feedback, report bugs, and rate the game on our **[Itch.io Page](https://towie1206.itch.io/lastshift)**!
 
 ---
 
