@@ -9,7 +9,11 @@
 
 **A 3D first-person psychological survival horror game. Survive the night, keep the power running, and monitor the cameras before your shift ends you.**
 
+<<<<<<< Updated upstream
 [🎮 Play on Itch.io](https://towie1206.itch.io/lastshift) • [📺 Watch Devlog (YouTube)](https://youtube.com/your-devlog-link-here) 
+=======
+[🎮 Play on Itch.io](https://towie1206.itch.io/lastshift) • [📺 Watch Devlog (YouTube)](https://youtube.com/your-devlog-link-here) • [🎨 Figma UI Design](https://www.figma.com/design/giXJAL6gsB4NRTOpyzeHKq/Last-Shift---UI-UX-Design-System)
+>>>>>>> Stashed changes
 
 </div>
 
